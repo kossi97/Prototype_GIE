@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.reg.meta">Regulation — OMORAN-GROUP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+      .page-hero {
+        min-height: 55vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 140px 5vw 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-hero .geo-bg {
+        opacity: 0.04;
+      }
+
+      .page-hero-bg-img {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: url('https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=1920&q=60') center/cover no-repeat;
+        opacity: 0.11;
+      }
+
+      .page-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+      }
+
+      .page-breadcrumb {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .35);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-breadcrumb a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+
+      .page-hero-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        color: var(--white);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-hero-title em {
+        font-style: italic;
+        color: var(--gold-light);
+        display: block;
+      }
+
+      .page-hero-desc {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, .55);
+        line-height: 1.9;
+        max-width: 560px;
+        border-left: 2px solid var(--gold-dark);
+        padding-left: 1.2rem;
+      }
+
+      .reg-bodies {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        height: 300px;
+        gap: 3px;
+      }
+
+      .reg-body-item {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .reg-body-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.55) saturate(.7);
+        transition: transform .5s, filter .4s;
+      }
+
+      .reg-body-item:hover img {
+        transform: scale(1.06);
+        filter: brightness(.7) saturate(1);
+      }
+
+      .reg-body-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 30%, rgba(10, 22, 40, .85) 100%);
+      }
+
+      .reg-body-label {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 1.5rem;
+        z-index: 2;
+      }
+
+      .reg-body-name {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--white);
+        margin-bottom: 0.2rem;
+      }
+
+      .reg-body-sub {
+        font-size: 0.62rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold-light);
+      }
+
+      .reg-deep {
+        padding: 5rem 5vw;
+        background: var(--navy-mid);
+      }
+
+      .reg-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 4rem;
+      }
+
+      .reg-col-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: .4rem 1rem;
+        margin-bottom: 1.5rem;
+        font-size: .62rem;
+        letter-spacing: .18em;
+        text-transform: uppercase;
+        font-weight: 600;
+        border-radius: 1px;
+      }
+
+      .reg-col-badge.u {
+        background: rgba(201, 168, 76, .12);
+        color: var(--gold-light);
+        border: 1px solid rgba(201, 168, 76, .2);
+      }
+
+      .reg-col-badge.c {
+        background: rgba(29, 158, 117, .1);
+        color: var(--teal-light);
+        border: 1px solid rgba(29, 158, 117, .2);
+      }
+
+      .reg-col-title {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        color: var(--white);
+        margin-bottom: .6rem;
+        line-height: 1.2;
+      }
+
+      .reg-col-intro {
+        font-size: .85rem;
+        color: rgba(255, 255, 255, .45);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+
+      .reg-col-img {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        border-radius: 1px;
+        position: relative;
+      }
+
+      .reg-col-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.7);
+        transition: transform .5s;
+      }
+
+      .reg-col:hover .reg-col-img img {
+        transform: scale(1.04);
+      }
+
+      .reg-col-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 22, 40, .4), transparent);
+      }
+
+      .reg-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: .9rem;
+      }
+
+      .reg-list li {
+        font-size: .85rem;
+        color: rgba(255, 255, 255, .6);
+        line-height: 1.7;
+        padding-left: 1.4rem;
+        position: relative;
+      }
+
+      .reg-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: .65rem;
+        width: 8px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      .comparison {
+        padding: 5rem 5vw;
+        background: var(--navy);
+      }
+
+      .comp-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 3rem;
+      }
+
+      .comp-table th,
+      .comp-table td {
+        padding: 1rem 1.2rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, .05);
+        font-size: .82rem;
+      }
+
+      .comp-table th {
+        font-size: .65rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        background: rgba(201, 168, 76, .05);
+        font-weight: 500;
+      }
+
+      .comp-table td {
+        color: rgba(255, 255, 255, .6);
+      }
+
+      .comp-table td:first-child {
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      .comp-table tr:hover td {
+        background: rgba(255, 255, 255, .02);
+      }
+
+      .badge-yes {
+        background: rgba(29, 158, 117, .1);
+        color: var(--teal-light);
+        padding: .2rem .6rem;
+        border-radius: 1px;
+        font-size: .65rem;
+      }
+
+      .badge-partial {
+        background: rgba(201, 168, 76, .08);
+        color: var(--gold);
+        padding: .2rem .6rem;
+        border-radius: 1px;
+        font-size: .65rem;
+      }
+
+      .badge-no {
+        background: rgba(255, 255, 255, .04);
+        color: rgba(255, 255, 255, .3);
+        padding: .2rem .6rem;
+        border-radius: 1px;
+        font-size: .65rem;
+      }
+
+      .free-section {
+        padding: 5rem 5vw;
+        background: var(--navy-mid);
+      }
+
+      .free-img-banner {
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 3rem;
+        border-radius: 2px;
+      }
+
+      .free-img-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.6);
+      }
+
+      .free-img-banner::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 22, 40, .5), rgba(29, 158, 117, .15));
+      }
+
+      .free-img-banner-text {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .free-img-banner-text h3 {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+      }
+
+      .free-img-banner-text p {
+        font-size: .85rem;
+        color: rgba(255, 255, 255, .6);
+        max-width: 400px;
+      }
+
+      .free-grid-6 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5px;
+        background: rgba(29, 158, 117, .1);
+      }
+
+      .free-item {
+        background: var(--navy-mid);
+        padding: 2rem 1.5rem;
+        border: 1px solid rgba(29, 158, 117, .08);
+        transition: background .3s;
+      }
+
+      .free-item:hover {
+        background: rgba(29, 158, 117, .05);
+      }
+
+      .free-item-num {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: rgba(29, 158, 117, .2);
+        margin-bottom: .6rem;
+      }
+
+      .free-item-title {
+        font-size: .9rem;
+        color: var(--white);
+        font-weight: 500;
+        margin-bottom: .4rem;
+      }
+
+      .free-item-sub {
+        font-size: .78rem;
+        color: rgba(255, 255, 255, .4);
+        line-height: 1.65;
+      }
+
+      .vig-band {
+        background: linear-gradient(135deg, rgba(201, 168, 76, .06), rgba(201, 168, 76, .02));
+        border-top: 1px solid rgba(201, 168, 76, .15);
+        border-bottom: 1px solid rgba(201, 168, 76, .15);
+        padding: 4rem 5vw;
+      }
+
+      .vig-inner {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 4rem;
+        align-items: start;
+      }
+
+      .vig-left-title {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--gold-light);
+        margin-bottom: .8rem;
+      }
+
+      .vig-left-desc {
+        font-size: .85rem;
+        color: rgba(255, 255, 255, .45);
+        line-height: 1.8;
+      }
+
+      .vig-cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .vig-card {
+        border: 1px solid rgba(255, 255, 255, .07);
+        border-left: 2px solid var(--gold);
+        padding: 1.5rem;
+        background: rgba(10, 22, 40, .5);
+      }
+
+      .vig-card-title {
+        font-size: .85rem;
+        color: var(--white);
+        font-weight: 600;
+        margin-bottom: .5rem;
+      }
+
+      .vig-card-desc {
+        font-size: .78rem;
+        color: rgba(255, 255, 255, .5);
+        line-height: 1.75;
+      }
+
+      .cta-band {
+        background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+        border-top: 1px solid rgba(201, 168, 76, .15);
+        padding: 4rem 5vw;
+        text-align: center;
+      }
+
+      .cta-band h3 {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: var(--white);
+        margin-bottom: .8rem;
+      }
+
+      .cta-band p {
+        color: rgba(255, 255, 255, .45);
+        font-size: .9rem;
+        margin-bottom: 2rem;
+      }
+
+      @media(max-width:900px) {
+        .reg-bodies {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .reg-body-item {
+          height: 140px;
+        }
+
+        .reg-cols {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        .free-grid-6 {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .vig-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .vig-cards {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media(max-width:600px) {
+        .free-grid-6 {
+          grid-template-columns: 1fr;
+        }
+
+        .comp-table {
+          font-size: .75rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="loader">
+      <div class="loader-emblem">
+        <div class="loader-inner">
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+      <div class="loader-text" data-i18n="loader.text">OMORAN-GROUP</div>
+    </div>
+
+    <nav id="main-nav">
+      <div class="nav-brand">
+        <img class="nav-logo" src="Logo_Prototype.png" alt="OMORAN-GROUP Logo" width="36" height="36">
+        <div class="nav-brand-text">
+          <div class="nav-brand-main">OMORAN-GROUP</div>
+          <div class="nav-brand-sub" data-i18n="nav.sub">Excellence · Finance · West Africa</div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-overlay" id="navOverlay"></div>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="services.html" data-i18n="nav.services">Services</a>
+        <a href="projects.html" data-i18n="nav.projects">Projects</a>
+        <a href="regulation.html" class="active" data-i18n="nav.regulation">Regulation</a>
+        <a href="free-zone.html" data-i18n="nav.zft">Free Zone</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+        <a href="index.html#contact" class="nav-cta" data-i18n="nav.contact">Contact us</a>
+        <button class="lang-switch" onclick="toggleLang()" id="langBtn">FR</button>
+      </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="geo-bg"></div>
+      <div class="page-hero-bg-img"></div>
+      <div class="page-hero-content reveal">
+        <div class="page-breadcrumb">
+          <a href="index.html" data-i18n="bc.home">Home</a> &nbsp;/&nbsp;
+          <span data-i18n="bc.regulation">Regulation</span>
+        </div>
+        <h1 class="page-hero-title">
+          <span data-i18n="reg.hero.title">Regional</span><br>
+          <em data-i18n="reg.hero.em">Legal Framework</em>
+        </h1>
+        <p class="page-hero-desc" data-i18n="reg.hero.desc">A dual regulatory architecture — UEMOA and ECOWAS — that
+          OMORAN-GROUP masters to position its activities in full compliance and seize freely accessible opportunities.
+        </p>
+      </div>
+    </div>
+
+    <!-- REGULATORY BODIES VISUAL -->
+    <div class="reg-bodies">
+      <div class="reg-body-item">
+        <img src="Financial_Union.jpeg" alt="UEMOA West Africa financial union" loading="lazy">
+        <div class="reg-body-overlay"></div>
+        <div class="reg-body-label">
+          <div class="reg-body-name">UEMOA</div>
+          <div class="reg-body-sub" data-i18n="reg.uemoa.sub">Economic &amp; Monetary Union</div>
+        </div>
+      </div>
+      <div class="reg-body-item">
+        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=70"
+          alt="ECOWAS West Africa integration" loading="lazy">
+        <div class="reg-body-overlay"></div>
+        <div class="reg-body-label">
+          <div class="reg-body-name">ECOWAS</div>
+          <div class="reg-body-sub" data-i18n="reg.ecowas.sub">Regional Economic Community</div>
+        </div>
+      </div>
+      <div class="reg-body-item">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=70"
+          alt="OHADA legal framework Africa" loading="lazy">
+        <div class="reg-body-overlay"></div>
+        <div class="reg-body-label">
+          <div class="reg-body-name">OHADA</div>
+          <div class="reg-body-sub" data-i18n="reg.ohada.sub">Unified Business Law</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REGULATION DEEP DIVE -->
+    <section class="reg-deep">
+      <div class="s-eyebrow reveal">
+        <div class="s-eyebrow-line"></div>
+        <span class="s-eyebrow-text" data-i18n="reg.eyebrow.regulated">Regulated Activities</span>
+      </div>
+      <h2 class="s-title reveal d1" data-i18n="reg.deep.title">Understanding the<br> Triple Regulatory Architecture</h2>
+      <div class="reg-cols">
+        <div class="reg-col reveal">
+          <span class="reg-col-badge u" data-i18n="reg.u.badge">UEMOA — Monetary Union</span>
+          <h3 class="reg-col-title" data-i18n="reg.u.title">Activities Regulated by the BCEAO</h3>
+          <p class="reg-col-intro" data-i18n="reg.u.intro">UEMOA tightly governs financial activities across 8 member
+            states through the BCEAO and regional market authorities.</p>
+          <div class="reg-col-img">
+            <img src="Activities_Regulated.jpg" alt="BCEAO West Africa monetary policy" loading="lazy">
+          </div>
+          <ul class="reg-list">
+            <li data-i18n="reg.u.1">Banks, financial institutions and microfinance (mandatory BCEAO licence)</li>
+            <li data-i18n="reg.u.2">Financial markets — BRVM and regional securities</li>
+            <li data-i18n="reg.u.3">Payment systems and electronic money transfers</li>
+            <li data-i18n="reg.u.4">Insurance and reinsurance operations</li>
+            <li data-i18n="reg.u.5">VAT harmonisation and customs duty framework</li>
+            <li data-i18n="reg.u.6">Public procurement, concessions and quality standards</li>
+            <li data-i18n="reg.u.7">Telecommunications, energy and regional infrastructure</li>
+          </ul>
+        </div>
+        <div class="reg-col reveal d2">
+          <span class="reg-col-badge c" data-i18n="reg.c.badge">ECOWAS — Economic Community</span>
+          <h3 class="reg-col-title" data-i18n="reg.c.title">Regionally Regulated Activities</h3>
+          <p class="reg-col-intro" data-i18n="reg.c.intro">ECOWAS governs cross-border activities and trade integration
+            across 15 member states, complementing UEMOA's monetary framework.</p>
+          <div class="reg-col-img">
+            <img src="Trade_Integration.jpg" alt="ECOWAS trade integration West Africa" loading="lazy">
+          </div>
+          <ul class="reg-list">
+            <li data-i18n="reg.c.1">Free movement of goods, services and capital (Protocol A/P1/1/03)</li>
+            <li data-i18n="reg.c.2">Road, maritime and air transport — safety and transit standards</li>
+            <li data-i18n="reg.c.3">Energy exchanges: electricity, hydrocarbons and mining</li>
+            <li data-i18n="reg.c.4">Monetary policy harmonisation with UEMOA</li>
+            <li data-i18n="reg.c.5">Anti-money laundering and counter-terrorism financing</li>
+            <li data-i18n="reg.c.6">Cross-border telecommunications and cybersecurity</li>
+            <li data-i18n="reg.c.7">Personal data protection across member states</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <section class="comparison">
+      <div class="geo-bg"></div>
+      <div class="s-eyebrow reveal">
+        <div class="s-eyebrow-line"></div>
+        <span class="s-eyebrow-text" data-i18n="reg.eyebrow.comparison">Comparative Overview</span>
+      </div>
+      <h2 class="s-title reveal d1" data-i18n="reg.comp.title">UEMOA vs ECOWAS<br>Regulatory Scope</h2>
+      <table class="comp-table reveal">
+        <thead>
+          <tr>
+            <th data-i18n="reg.comp.col1">Domain</th>
+            <th data-i18n="reg.comp.col2">UEMOA (Monetary Union)</th>
+            <th data-i18n="reg.comp.col3">ECOWAS (Economic Community)</th>
+            <th data-i18n="reg.comp.col4">GIE DYNAMIC Exposure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Banking &amp; Finance</td>
+            <td><span class="badge-yes">Yes — BCEAO</span></td>
+            <td><span class="badge-yes">Yes — Regional</span></td>
+            <td>High — MUSED Project</td>
+          </tr>
+          <tr>
+            <td>Microfinance</td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td>High — Core focus</td>
+          </tr>
+          <tr>
+            <td>Insurance</td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td>Monitored</td>
+          </tr>
+          <tr>
+            <td>Intra-regional Trade</td>
+            <td><span class="badge-partial">Partial</span></td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td>Moderate</td>
+          </tr>
+          <tr>
+            <td>Transport &amp; Logistics</td>
+            <td><span class="badge-no">No</span></td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td>Low</td>
+          </tr>
+          <tr>
+            <td>Energy</td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td>Low</td>
+          </tr>
+          <tr>
+            <td>Telecommunications</td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td>Low</td>
+          </tr>
+          <tr>
+            <td>Fiscal &amp; Customs</td>
+            <td><span class="badge-yes">Yes — VAT</span></td>
+            <td><span class="badge-yes">Yes — Tariffs</span></td>
+            <td>Moderate</td>
+          </tr>
+          <tr>
+            <td>Capital Movement</td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td><span class="badge-yes">Yes</span></td>
+            <td>High</td>
+          </tr>
+          <tr>
+            <td>Advisory &amp; Consulting</td>
+            <td><span class="badge-no">Free</span></td>
+            <td><span class="badge-no">Free</span></td>
+            <td>Core activity — unrestricted</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FREE ACTIVITIES -->
+    <section class="free-section">
+      <div class="free-img-banner">
+        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1920&q=65"
+          alt="Free financial activities West Africa SME" loading="lazy">
+        <div class="free-img-banner-text">
+          <h3 data-i18n="free.title">Free Activities — Personalized Services</h3>
+          <p data-i18n="free.banner.desc">These activities deliver maximum value operating freely under national
+            commercial law.</p>
+        </div>
+      </div>
+      <div class="free-grid-6 reveal">
+        <div class="free-item">
+          <div class="free-item-num">01</div>
+          <div class="free-item-title" data-i18n="free.1.title">Financial Education</div>
+          <div class="free-item-sub" data-i18n="free.1.sub">Training, workshops, youth, women and SME financial literacy
+            programmes</div>
+        </div>
+        <div class="free-item">
+          <div class="free-item-num">02</div>
+          <div class="free-item-title" data-i18n="free.2.title">Management Advisory</div>
+          <div class="free-item-sub" data-i18n="free.2.sub">Financial coaching, accounting obligations, startup and SME
+            support</div>
+        </div>
+        <div class="free-item">
+          <div class="free-item-num">03</div>
+          <div class="free-item-title" data-i18n="free.3.title">Management Technologies</div>
+          <div class="free-item-sub" data-i18n="free.3.sub">Digital tracking, invoicing and budgeting software solutions
+          </div>
+        </div>
+        <div class="free-item">
+          <div class="free-item-num">04</div>
+          <div class="free-item-title" data-i18n="free.4.title">Savings Groups</div>
+          <div class="free-item-sub" data-i18n="free.4.sub">Securing tontines, solidarity funds and community
+            associations</div>
+        </div>
+        <div class="free-item">
+          <div class="free-item-num">05</div>
+          <div class="free-item-title" data-i18n="free.5.title">Economic Studies</div>
+          <div class="free-item-sub" data-i18n="free.5.sub">Reports, market analysis, financial policy monitoring and
+            research</div>
+        </div>
+        <div class="free-item">
+          <div class="free-item-num">06</div>
+          <div class="free-item-title" data-i18n="free.6.title">Company Domiciliation</div>
+          <div class="free-item-sub" data-i18n="free.6.sub">Legal address, RCCM formalities and administrative support
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CTA BAND -->
+    <div class="cta-band">
+      <h3 data-i18n="cta.reg.title">Need regulatory guidance?</h3>
+      <p data-i18n="cta.reg.desc">Our compliance experts navigate the triple UEMOA/ECOWAS/OHADA framework on your
+        behalf.</p>
+      <a href="index.html#contact" class="btn-gold" style="display:inline-block;" data-i18n="cta.reg.btn">Contact our
+        experts</a>
+    </div>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-logo">OMORAN-GROUP</div>
+          <div class="footer-brand-sub" data-i18n="footer.sub">Financial Excellence in West Africa</div>
+          <p class="footer-desc" data-i18n="footer.desc">Economic Interest Grouping structured around financial
+            engineering, strategic asset acquisition and market development in the UEMOA/ECOWAS space, from Lomé, Togo.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.services">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html" data-i18n="svc.1.title">Financial Intermediation</a></li>
+            <li><a href="services.html" data-i18n="svc.2.title">Financial Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.3.title">Legal Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.4.title">Fundraising</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.pages">Pages</div>
+          <ul class="footer-links">
+            <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="regulation.html" data-i18n="nav.regulation">Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Free Zone</a></li>
+            <li><a href="news.html" data-i18n="nav.news">News</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.legal">Legal Framework</div>
+          <ul class="footer-links">
+            <li><a href="regulation.html" data-i18n="nav.regulation">UEMOA Regulation</a></li>
+            <li><a href="regulation.html" data-i18n="footer.ecowas">ECOWAS Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Togo Free Zone</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 OMORAN-GROUP — <span data-i18n="footer.rights">All rights
+            reserved</span></span>
+        <span class="footer-compliance">UEMOA · ECOWAS · OHADA · ZFT <span
+            data-i18n="footer.compliant">Compliant</span></span>
+      </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+  </body>
+
+</html>

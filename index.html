@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title data-i18n="meta.title">OMORAN-GROUP — Financial Excellence in West Africa</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+  </head>
+
+  <body>
+
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="loader-emblem">
+        <div class="loader-inner">
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+      <div class="loader-text" data-i18n="loader.text">OMORAN-GROUP</div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+     NAV
+  ════════════════════════════════════════ -->
+    <nav id="main-nav">
+      <div class="nav-brand">
+        <img class="nav-logo" src="Logo_Prototype.png" alt="OMORAN-GROUP Logo" width="36" height="36">
+        <div class="nav-brand-text">
+          <div class="nav-brand-main">OMORAN-GROUP</div>
+          <a href="index.html" style="text-decoration:none;"></a>
+          <div class="nav-brand-sub" data-i18n="nav.sub">Excellence · Finance · West Africa</div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-overlay" id="navOverlay"></div>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="active" data-i18n="nav.home">Home</a>
+        <a href="services.html" data-i18n="nav.services">Services</a>
+        <a href="projects.html" data-i18n="nav.projects">Projects</a>
+        <a href="regulation.html" data-i18n="nav.regulation">Regulation</a>
+        <a href="free-zone.html" data-i18n="nav.zft">Free Zone</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+        <a href="index.html#contact" class="nav-cta" data-i18n="nav.contact">Contact us</a>
+        <button class="lang-switch" onclick="toggleLang()" id="langBtn">FR</button>
+      </div>
+    </nav>
+
+    <!-- ════════════════════════════════════════
+     HERO — Section 1
+  ════════════════════════════════════════ -->
+    <section class="hero" id="home">
+      <div class="hero-bg-img"></div>
+      <div class="hero-pattern"></div>
+      <div class="hero-content">
+        <div class="hero-badge" data-i18n="hero.badge">UEMOA · ECOWAS · Togo Free Zone</div>
+        <h1 class="hero-title" data-i18n="hero.title">
+          Financial &amp; Legal<br>African Hub
+          <em data-i18n="hero.subtitle">Serving the International</em>
+        </h1>
+        <p class="hero-desc" data-i18n="hero.desc">
+          OMORAN-GROUP accompanies businesses and investors in their development across West Africa — advisory,
+          financial
+          engineering, acquisition, structuring and regulatory compliance.
+        </p>
+        <div class="hero-actions">
+          <a href="services.html" class="btn-primary" data-i18n="hero.cta1">Discover our services</a>
+          <a href="projects.html" class="btn-outline btn-outline-pulse" data-i18n="hero.cta2">Our projects</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-cards">
+          <div class="hero-stat-card reveal d1">
+            <div class="num" data-i18n="vision.title1">Vision</div>
+            <div class="lbl" data-i18n="vision.text1">To become the leading financial engineering and strategic
+              investment hub in West Africa, bridging international capital with regional opportunities.</div>
+          </div>
+          <div class="hero-stat-card reveal d2">
+            <div class="num" data-i18n="vision.title2">Values</div>
+            <div class="lbl" data-i18n="vision.text2">Excellence, Integrity, Confidentiality, Regulatory Rigor, and
+              Long-term Partnership — the pillars guiding every operation we undertake.</div>
+          </div>
+          <div class="hero-stat-card reveal d3">
+            <div class="num" data-i18n="vision.title3">Objectives</div>
+            <div class="lbl" data-i18n="vision.text3">Strategic asset acquisition, GIE structuring, ZFT integration, and
+              building a sovereign-grade financial ecosystem across the UEMOA/ECOWAS space.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRIP KEY FIGURES -->
+    <div class="about-strip">
+      <div class="about-strip-inner">
+        <div class="about-pillar reveal d1">
+          <span class="about-pillar-num">BCEAO</span>
+          <span class="about-pillar-label" data-i18n="strip.bceao">Reference Regulation</span>
+        </div>
+        <div class="about-pillar-divider"></div>
+        <div class="about-pillar reveal d2">
+          <span class="about-pillar-num">OHADA</span>
+          <span class="about-pillar-label" data-i18n="strip.ohada">Unified Legal Framework</span>
+        </div>
+        <div class="about-pillar-divider"></div>
+        <div class="about-pillar reveal d3">
+          <span class="about-pillar-num">ZFT</span>
+          <span class="about-pillar-label" data-i18n="strip.zft">Togo Free Zone</span>
+        </div>
+        <div class="about-pillar-divider"></div>
+        <div class="about-pillar reveal d4">
+          <span class="about-pillar-num">NDA</span>
+          <span class="about-pillar-label" data-i18n="strip.nda">Guaranteed Confidentiality</span>
+        </div>
+        <div class="about-pillar-divider"></div>
+        <div class="about-pillar reveal d5">
+          <span class="about-pillar-num">SPV</span>
+          <span class="about-pillar-label" data-i18n="strip.spv">Optimized Legal Structuring</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+     HERO — Section 2 : Structure · Invest · Prosper
+     (id corrigé : home2 pour éviter le doublon)
+  ════════════════════════════════════════ -->
+    <section class="hero" id="home2">
+      <div class="hero-bg">
+        <div class="geo-bg"></div>
+        <div class="hero-gradient"></div>
+      </div>
+
+      <div class="hero-divider"></div>
+
+      <div class="hero-left">
+        <h1 class="hero-title">
+          <span data-i18n="hero.title1">Structure.</span>
+          <span class="gold-line" data-i18n="hero.title2">Invest.</span>
+          <span data-i18n="hero.title3">Prosper.</span>
+          <span class="thin-line" data-i18n="hero.subtitle2">
+            Economic Interest Group — Lomé, Togo
+          </span>
+        </h1>
+
+        <p class="hero-desc" data-i18n="hero.description2">
+          OMORAN-GROUP leads strategic investment projects across West Africa —
+          financial engineering, institutional acquisitions, and market
+          development in full compliance with BCEAO, OHADA, and ECOWAS
+          regulatory frameworks.
+        </p>
+
+        <div class="hero-btns">
+          <a href="projects.html" class="btn-gold" data-i18n="hero.btnProjects">View Our Projects</a>
+          <a href="services.html" class="btn-ghost" data-i18n="hero.btnServices">Our Expertise</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-pillar reveal-right">
+          <div class="pillar-header">
+            <div class="pillar-header-tag" data-i18n="hero.regionTag">Regional Presence</div>
+            <div class="pillar-header-title" data-i18n="hero.regionTitle">Our Reach</div>
+          </div>
+          <div class="pillar-stat">
+            <div class="stat-num">8</div>
+            <div class="stat-info">
+              <div class="stat-label" data-i18n="hero.uemoaStates">WAEMU Member States</div>
+              <div class="stat-sub" data-i18n="hero.uemoaSub">Economic and Monetary Union</div>
+            </div>
+          </div>
+          <div class="pillar-stat">
+            <div class="stat-num">15</div>
+            <div class="stat-info">
+              <div class="stat-label" data-i18n="hero.ecowasStates">ECOWAS Member States</div>
+              <div class="stat-sub" data-i18n="hero.ecowasSub">Regional Economic Community</div>
+            </div>
+          </div>
+          <div class="pillar-stat">
+            <div class="stat-num">6</div>
+            <div class="stat-info">
+              <div class="stat-label" data-i18n="hero.expertise">Areas of Expertise</div>
+              <div class="stat-sub" data-i18n="hero.expertiseSub">Finance · Law · Technology</div>
+            </div>
+          </div>
+          <div class="pillar-stat">
+            <div class="stat-num">3</div>
+            <div class="stat-info">
+              <div class="stat-label" data-i18n="hero.phases">Development Phases</div>
+              <div class="stat-sub" data-i18n="hero.phasesSub">Acquisition · EIG · TFZ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+     ███████╗███████╗ ██████╗     SECTION ÉCONOMIE VERTE / ESG
+     ██╔════╝██╔════╝██╔════╝     Environnement · Social · Gouvernance
+     █████╗  ███████╗██║  ███╗
+     ██╔══╝  ╚════██║██║   ██║
+     ███████╗███████║╚██████╔╝
+     ╚══════╝╚══════╝ ╚═════╝
+  ════════════════════════════════════════════════════════════ -->
+
+    <!-- ── INTRO ESG ── -->
+    <section class="esg-intro" id="esg">
+
+      <!-- SVG géométrique décoratif -->
+      <svg class="esg-geo" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="260" cy="260" r="240" stroke="white" stroke-width="0.5" />
+        <circle cx="260" cy="260" r="180" stroke="white" stroke-width="0.5" />
+        <circle cx="260" cy="260" r="120" stroke="white" stroke-width="0.5" />
+        <line x1="20" y1="260" x2="500" y2="260" stroke="white" stroke-width="0.5" />
+        <line x1="260" y1="20" x2="260" y2="500" stroke="white" stroke-width="0.5" />
+        <line x1="90" y1="90" x2="430" y2="430" stroke="white" stroke-width="0.5" />
+        <line x1="430" y1="90" x2="90" y2="430" stroke="white" stroke-width="0.5" />
+        <!-- Feuille stylisée -->
+        <path d="M260 80 C340 160 380 240 260 320 C140 240 180 160 260 80Z" stroke="white" stroke-width="0.8"
+          fill="none" />
+        <path d="M260 80 L260 320" stroke="white" stroke-width="0.5" />
+      </svg>
+
+      <div class="esg-intro-inner">
+        <div class="esg-intro-left reveal">
+          <div class="esg-eyebrow">
+            <div class="esg-eyebrow-line"></div>
+            <span class="esg-eyebrow-text" data-i18n="esg.eyebrow">Green Economy &amp; ESG Commitment</span>
+          </div>
+          <h2 class="esg-intro-title" data-i18n="esg.intro.title">
+            Finance that<br>builds a <em>sustainable</em><br>West Africa
+          </h2>
+          <p class="esg-intro-desc" data-i18n="esg.intro.desc">
+            OMORAN-GROUP integrates Environmental, Social and Governance criteria at the heart of every investment
+            decision.
+            Our ESG framework aligns financial performance with positive impact — for the region, its communities and
+            future generations.
+          </p>
+        </div>
+
+        <div class="esg-intro-right reveal d2">
+          <div class="esg-stat-box">
+            <div class="esg-stat-num">SDG</div>
+            <div class="esg-stat-label" data-i18n="esg.stat1">Aligned with UN Sustainable Development Goals</div>
+          </div>
+          <div class="esg-stat-box">
+            <div class="esg-stat-num">100%</div>
+            <div class="esg-stat-label" data-i18n="esg.stat2">ESG screening on all investment projects</div>
+          </div>
+          <div class="esg-stat-box">
+            <div class="esg-stat-num">3</div>
+            <div class="esg-stat-label" data-i18n="esg.stat3">ESG pillars: Environment · Social · Governance</div>
+          </div>
+          <div class="esg-stat-box">
+            <div class="esg-stat-num">OHADA</div>
+            <div class="esg-stat-label" data-i18n="esg.stat4">Responsible governance under unified law</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TROIS PILIERS ESG (tabs) ── -->
+    <section class="esg-pillars">
+
+      <!-- Navigation par onglets -->
+      <div class="esg-pillars-tabs reveal">
+        <button class="esg-tab active active-env" id="tab-env" onclick="switchEsgTab('env')" data-i18n="esg.tab.env">
+          <span class="tab-icon">🌿</span> Green Economy
+        </button>
+        <button class="esg-tab" id="tab-soc" onclick="switchEsgTab('soc')" data-i18n="esg.tab.soc">
+          <span class="tab-icon">🤝</span> Social Approach
+        </button>
+        <button class="esg-tab" id="tab-gov" onclick="switchEsgTab('gov')" data-i18n="esg.tab.gov">
+          <span class="tab-icon">⚖️</span> ESG Governance
+        </button>
+      </div>
+
+      <div class="esg-panels">
+
+        <!-- ═══ PANNEAU 1 : ÉCONOMIE VERTE ═══ -->
+        <div class="esg-panel active" id="panel-env">
+          <div class="esg-green-layout">
+
+            <div class="reveal">
+              <div class="esg-panel-eyebrow green" data-i18n="esg.env.eyebrow">Environmental Pillar</div>
+              <h3 class="esg-panel-title" data-i18n="esg.env.title">
+                Green Economy<br>&amp; Climate Finance
+              </h3>
+              <p class="esg-panel-desc" data-i18n="esg.env.desc">
+                OMORAN-GROUP actively channels capital toward green economy projects in West Africa — renewable energy,
+                sustainable agriculture,
+                eco-responsible infrastructure and carbon market instruments — in alignment with ECOWAS Climate Strategy
+                and African Union Agenda 2063.
+              </p>
+
+              <!-- Indicateurs -->
+              <div class="esg-indicators">
+                <div class="esg-ind-box">
+                  <div class="esg-ind-val">+12%</div>
+                  <div class="esg-ind-label" data-i18n="esg.env.ind1">Green FDI growth in the ECOWAS zone (2025)</div>
+                </div>
+                <div class="esg-ind-box">
+                  <div class="esg-ind-val">17</div>
+                  <div class="esg-ind-label" data-i18n="esg.env.ind2">SDGs addressed by our investment framework</div>
+                </div>
+                <div class="esg-ind-box">
+                  <div class="esg-ind-val">ZFT</div>
+                  <div class="esg-ind-label" data-i18n="esg.env.ind3">Free Zone as green hub entry point</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="esg-cards-col reveal d2">
+              <div class="esg-card">
+                <div class="esg-card-icon green">☀️</div>
+                <div class="esg-card-body">
+                  <div class="esg-card-title" data-i18n="esg.env.c1.title">Renewable Energy Finance</div>
+                  <div class="esg-card-desc" data-i18n="esg.env.c1.desc">Structuring and intermediation for solar, wind
+                    and hydroelectric projects across ECOWAS member states, mobilising green bonds and climate funds.
+                  </div>
+                </div>
+              </div>
+              <div class="esg-card">
+                <div class="esg-card-icon green">🌱</div>
+                <div class="esg-card-body">
+                  <div class="esg-card-title" data-i18n="esg.env.c2.title">Sustainable Agribusiness</div>
+                  <div class="esg-card-desc" data-i18n="esg.env.c2.desc">Investment engineering for regenerative
+                    agriculture, agroforestry value chains and food security projects aligned with ECOWAS agricultural
+                    frameworks.</div>
+                </div>
+              </div>
+              <div class="esg-card">
+                <div class="esg-card-icon green">🏗️</div>
+                <div class="esg-card-body">
+                  <div class="esg-card-title" data-i18n="esg.env.c3.title">Green Infrastructure</div>
+                  <div class="esg-card-desc" data-i18n="esg.env.c3.desc">Eco-responsible logistics, low-carbon urban
+                    development and climate-resilient infrastructure financed through innovative SPV and ZFT structures.
+                  </div>
+                </div>
+              </div>
+              <div class="esg-card">
+                <div class="esg-card-icon green">💧</div>
+                <div class="esg-card-body">
+                  <div class="esg-card-title" data-i18n="esg.env.c4.title">Blue Economy &amp; Water</div>
+                  <div class="esg-card-desc" data-i18n="esg.env.c4.desc">Financial engineering for water management,
+                    coastal resources and maritime economy development along the Gulf of Guinea coastline.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ PANNEAU 2 : APPROCHE SOCIALE ═══ -->
+        <div class="esg-panel" id="panel-soc">
+          <div class="esg-social-layout">
+
+            <div class="reveal">
+              <div class="esg-panel-eyebrow blue" data-i18n="esg.soc.eyebrow">Social Pillar</div>
+              <h3 class="esg-panel-title" data-i18n="esg.soc.title">
+                Social Approach<br>&amp; Inclusive Finance
+              </h3>
+              <p class="esg-panel-desc" data-i18n="esg.soc.desc">
+                Our social commitment places human development at the centre of financial operations.
+                Through microfinance, financial inclusion and community programmes, OMORAN-GROUP drives sustainable
+                wealth creation
+                for all segments of West African society — with particular focus on women, youth and SMEs.
+              </p>
+
+              <!-- Timeline des engagements sociaux -->
+              <div class="esg-timeline">
+                <div class="esg-tl-item">
+                  <div class="esg-tl-dot">🏦</div>
+                  <div class="esg-tl-content">
+                    <div class="esg-tl-title" data-i18n="esg.soc.tl1.title">Financial Inclusion via MUSED</div>
+                    <div class="esg-tl-desc" data-i18n="esg.soc.tl1.desc">The MUSED microfinance acquisition directly
+                      extends regulated financial services to underbanked populations across the UEMOA zone.</div>
+                  </div>
+                </div>
+                <div class="esg-tl-item">
+                  <div class="esg-tl-dot">👩‍💼</div>
+                  <div class="esg-tl-content">
+                    <div class="esg-tl-title" data-i18n="esg.soc.tl2.title">Women &amp; Youth Entrepreneurship</div>
+                    <div class="esg-tl-desc" data-i18n="esg.soc.tl2.desc">Dedicated financial literacy programmes,
+                      coaching and access-to-finance structures targeting women entrepreneurs and youth-led enterprises.
+                    </div>
+                  </div>
+                </div>
+                <div class="esg-tl-item">
+                  <div class="esg-tl-dot">📚</div>
+                  <div class="esg-tl-content">
+                    <div class="esg-tl-title" data-i18n="esg.soc.tl3.title">Financial Education &amp; Capacity Building
+                    </div>
+                    <div class="esg-tl-desc" data-i18n="esg.soc.tl3.desc">Workshops, training and advisory services
+                      building financial autonomy in communities, SMEs and cooperative organisations across West Africa.
+                    </div>
+                  </div>
+                </div>
+                <div class="esg-tl-item">
+                  <div class="esg-tl-dot">🌍</div>
+                  <div class="esg-tl-content">
+                    <div class="esg-tl-title" data-i18n="esg.soc.tl4.title">Diaspora Investment Mobilisation</div>
+                    <div class="esg-tl-desc" data-i18n="esg.soc.tl4.desc">Structuring vehicles for diaspora capital to
+                      flow efficiently into productive regional investments — bridging global savings with local
+                      development needs.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal d2">
+              <!-- Chiffres d'engagement -->
+              <div class="esg-commitment-grid" style="margin-bottom: 2rem;">
+                <div class="esg-commit-box">
+                  <div class="esg-commit-num">400M+</div>
+                  <div class="esg-commit-label" data-i18n="esg.soc.k1">Population reached via ECOWAS market access</div>
+                </div>
+                <div class="esg-commit-box">
+                  <div class="esg-commit-num">60%</div>
+                  <div class="esg-commit-label" data-i18n="esg.soc.k2">Unbanked adults in West Africa — target for
+                    inclusion</div>
+                </div>
+                <div class="esg-commit-box">
+                  <div class="esg-commit-num">8</div>
+                  <div class="esg-commit-label" data-i18n="esg.soc.k3">UEMOA states covered by inclusion strategy</div>
+                </div>
+                <div class="esg-commit-box">
+                  <div class="esg-commit-num">SME</div>
+                  <div class="esg-commit-label" data-i18n="esg.soc.k4">Priority focus: Small &amp; Medium Enterprises
+                  </div>
+                </div>
+              </div>
+
+              <!-- Principes sociaux -->
+              <div class="esg-cards-col" style="background: rgba(91,168,212,0.08);">
+                <div class="esg-card">
+                  <div class="esg-card-icon blue">🤝</div>
+                  <div class="esg-card-body">
+                    <div class="esg-card-title" data-i18n="esg.soc.p1.title">Responsible Partnerships</div>
+                    <div class="esg-card-desc" data-i18n="esg.soc.p1.desc">All partnership agreements incorporate social
+                      responsibility clauses aligned with ILO core labour standards and ECOWAS social protocols.</div>
+                  </div>
+                </div>
+                <div class="esg-card">
+                  <div class="esg-card-icon blue">⚕️</div>
+                  <div class="esg-card-body">
+                    <div class="esg-card-title" data-i18n="esg.soc.p2.title">Community Health &amp; Welfare</div>
+                    <div class="esg-card-desc" data-i18n="esg.soc.p2.desc">Investment projects are evaluated on their
+                      contribution to community health, education and social welfare outcomes in host territories.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ PANNEAU 3 : GOUVERNANCE ESG ═══ -->
+        <div class="esg-panel" id="panel-gov">
+          <div class="reveal" style="margin-bottom: 3rem;">
+            <div class="esg-panel-eyebrow gold" data-i18n="esg.gov.eyebrow">Governance Pillar</div>
+            <h3 class="esg-panel-title" data-i18n="esg.gov.title">
+              ESG Governance &amp;<br>Responsible Investment
+            </h3>
+            <p class="esg-panel-desc" style="max-width: 700px;" data-i18n="esg.gov.desc">
+              OMORAN-GROUP applies stringent governance standards across all operations — transparency, anti-corruption,
+              regulatory compliance and long-term accountability form the non-negotiable foundation of every transaction
+              we structure, under OHADA law and international best practices.
+            </p>
+          </div>
+
+          <div class="esg-gov-layout reveal d1">
+            <div class="esg-gov-card gold-top">
+              <div class="esg-gov-icon">🏛️</div>
+              <div class="esg-gov-title" data-i18n="esg.gov.c1.title">Regulatory Compliance</div>
+              <p class="esg-gov-desc" data-i18n="esg.gov.c1.desc">Full compliance with BCEAO, UEMOA, ECOWAS and OHADA
+                frameworks — no exceptions. Every structure is pre-cleared against all applicable regulatory
+                requirements.</p>
+              <ul class="esg-gov-list">
+                <li data-i18n="esg.gov.c1.p1">BCEAO prudential ratio monitoring</li>
+                <li data-i18n="esg.gov.c1.p2">AML/CFT compliance screening</li>
+                <li data-i18n="esg.gov.c1.p3">OHADA corporate governance standards</li>
+                <li data-i18n="esg.gov.c1.p4">ECOWAS cross-border compliance</li>
+              </ul>
+            </div>
+            <div class="esg-gov-card green-top">
+              <div class="esg-gov-icon">🔍</div>
+              <div class="esg-gov-title" data-i18n="esg.gov.c2.title">Transparency &amp; Anti-Corruption</div>
+              <p class="esg-gov-desc" data-i18n="esg.gov.c2.desc">NDA-protected operations with mandatory beneficial
+                ownership disclosure, conflict-of-interest policies and independent audit requirements on all flagship
+                projects.</p>
+              <ul class="esg-gov-list">
+                <li data-i18n="esg.gov.c2.p1">Beneficial ownership transparency</li>
+                <li data-i18n="esg.gov.c2.p2">Conflict of interest management</li>
+                <li data-i18n="esg.gov.c2.p3">Independent audit requirements</li>
+                <li data-i18n="esg.gov.c2.p4">Zero-tolerance anti-corruption policy</li>
+              </ul>
+            </div>
+            <div class="esg-gov-card blue-top">
+              <div class="esg-gov-icon">📊</div>
+              <div class="esg-gov-title" data-i18n="esg.gov.c3.title">ESG Reporting &amp; Impact</div>
+              <p class="esg-gov-desc" data-i18n="esg.gov.c3.desc">Systematic ESG impact measurement across all
+                investment portfolios, with reporting aligned to GRI standards and ECOWAS Sustainable Finance Initiative
+                guidelines.</p>
+              <ul class="esg-gov-list">
+                <li data-i18n="esg.gov.c3.p1">GRI-aligned impact reporting</li>
+                <li data-i18n="esg.gov.c3.p2">Carbon footprint measurement</li>
+                <li data-i18n="esg.gov.c3.p3">Social return on investment (SROI)</li>
+                <li data-i18n="esg.gov.c3.p4">Annual ESG performance disclosure</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /esg-panels -->
+
+      <!-- ── Barres de progression ESG ── -->
+      <div class="esg-progress-band reveal" id="esgProgressBand">
+        <div class="esg-progress-item">
+          <div class="esg-progress-label" data-i18n="esg.prog.env">Environmental Integration</div>
+          <div class="esg-progress-bar-wrap">
+            <div class="esg-progress-bar green" style="--target-w: 78%"></div>
+          </div>
+          <div class="esg-progress-pct">78%</div>
+        </div>
+        <div class="esg-progress-item">
+          <div class="esg-progress-label" data-i18n="esg.prog.soc">Social Impact Score</div>
+          <div class="esg-progress-bar-wrap">
+            <div class="esg-progress-bar blue" style="--target-w: 85%"></div>
+          </div>
+          <div class="esg-progress-pct">85%</div>
+        </div>
+        <div class="esg-progress-item">
+          <div class="esg-progress-label" data-i18n="esg.prog.gov">Governance Compliance</div>
+          <div class="esg-progress-bar-wrap">
+            <div class="esg-progress-bar gold" style="--target-w: 92%"></div>
+          </div>
+          <div class="esg-progress-pct">92%</div>
+        </div>
+        <div class="esg-progress-item">
+          <div class="esg-progress-label" data-i18n="esg.prog.esg">Global ESG Rating</div>
+          <div class="esg-progress-bar-wrap">
+            <div class="esg-progress-bar teal" style="--target-w: 84%"></div>
+          </div>
+          <div class="esg-progress-pct">84%</div>
+        </div>
+      </div>
+
+    </section>
+    <!-- ════════ FIN SECTION ESG ════════ -->
+
+
+    <!-- ════════════════════════════════════════
+     CONTACT
+  ════════════════════════════════════════ -->
+    <section class="contact-section" id="contact">
+      <div class="geo-bg"></div>
+      <div class="contact-deco"></div>
+      <h2 class="contact-title reveal d1" data-i18n="contact.title">
+        Let's build together<br><em>the African finance of tomorrow</em>
+      </h2>
+      <p class="contact-sub reveal d2" data-i18n="contact.subtitle">
+        OMORAN-GROUP welcomes investors, institutional partners and entrepreneurs seeking to join a dynamic of financial
+        excellence in West Africa.
+      </p>
+      <div class="contact-btns reveal d3">
+        <a href="mailto:contact@giedynamic.tg" class="btn-gold" data-i18n="contact.cta1">Write to us</a>
+        <a href="projects.html" class="btn-ghost" data-i18n="contact.cta2">View our projects</a>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter">
+      <h3 data-i18n="newsletter.title">Stay Informed</h3>
+      <p data-i18n="newsletter.desc">Subscribe to OMORAN-GROUP's weekly West Africa Financial Intelligence briefing.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" data-i18n-placeholder="newsletter.placeholder"
+          placeholder="your@email.com">
+        <button class="newsletter-btn" data-i18n="newsletter.btn">Subscribe</button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+     FOOTER
+  ════════════════════════════════════════ -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-logo">OMORAN-GROUP</div>
+          <div class="footer-brand-sub" data-i18n="footer.sub">Financial Excellence in West Africa</div>
+          <p class="footer-desc" data-i18n="footer.desc">Economic Interest Grouping structured around financial
+            engineering, strategic asset acquisition and market development in the UEMOA/ECOWAS space, from Lomé, Togo.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.services">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html" data-i18n="svc.1.title">Financial Intermediation</a></li>
+            <li><a href="services.html" data-i18n="svc.2.title">Financial Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.3.title">Legal Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.4.title">Fundraising</a></li>
+            <li><a href="services.html" data-i18n="svc.5.title">Sovereign Asset Management</a></li>
+            <li><a href="services.html" data-i18n="svc.6.title">Project Design</a></li>
+            <li><a href="services.html" data-i18n="svc.7.title">Domiciliation</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.projects">Projects</div>
+          <ul class="footer-links">
+            <li><a href="projects.html" data-i18n="proj.1.title">MUSED Acquisition</a></li>
+            <li><a href="projects.html" data-i18n="proj.2.title">GIE Constitution</a></li>
+            <li><a href="projects.html" data-i18n="proj.3.title">ZFT Licence</a></li>
+            <li><a href="#esg" data-i18n="esg.footer.link">Green Economy &amp; ESG</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.legal">Legal Framework</div>
+          <ul class="footer-links">
+            <li><a href="regulation.html" data-i18n="nav.regulation">UEMOA Regulation</a></li>
+            <li><a href="regulation.html" data-i18n="footer.ecowas">ECOWAS Regulation</a></li>
+            <li><a href="regulation.html" data-i18n="free.title.footer">Free Activities</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Togo Free Zone</a></li>
+            <li><a href="news.html" data-i18n="nav.news">News</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 OMORAN-GROUP — <span data-i18n="footer.rights">All rights
+            reserved</span></span>
+        <span class="footer-compliance">UEMOA · ECOWAS · OHADA · ZFT <span
+            data-i18n="footer.compliant">Compliant</span></span>
+      </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.projects.meta">Projects — OMORAN-GROUP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+      .page-hero {
+        min-height: 55vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 140px 5vw 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .page-hero .geo-bg {
+        opacity: 0.04;
+      }
+
+      .page-hero-bg-img {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: url('https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1920&q=60') center/cover no-repeat;
+        opacity: 0.12;
+      }
+
+      .page-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+      }
+
+      .page-breadcrumb {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-breadcrumb a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+
+      .page-hero-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        color: var(--white);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-hero-title em {
+        font-style: italic;
+        color: var(--gold-light);
+        display: block;
+      }
+
+      .page-hero-desc {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.9;
+        max-width: 560px;
+        border-left: 2px solid var(--gold-dark);
+        padding-left: 1.2rem;
+      }
+
+      .proj-hero-img {
+        width: 100%;
+        height: 420px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .proj-hero-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.6);
+      }
+
+      .proj-hero-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(10, 22, 40, .8) 0%, transparent 50%);
+      }
+
+      .proj-hero-img-caption {
+        position: absolute;
+        bottom: 2rem;
+        left: 5vw;
+        z-index: 2;
+      }
+
+      .proj-hero-img-title {
+        font-family: var(--font-serif);
+        font-size: 1.6rem;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+      }
+
+      .proj-hero-img-badge {
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+
+      .proj-full {
+        padding: 5rem 5vw;
+        position: relative;
+      }
+
+      .proj-full-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+        margin: 2rem 0 3rem;
+      }
+
+      .proj-full-sub {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.5rem;
+      }
+
+      .proj-full-title {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        color: var(--white);
+        line-height: 1.1;
+        margin-bottom: 1.2rem;
+      }
+
+      .proj-full-desc {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, .55);
+        line-height: 1.9;
+      }
+
+      .proj-metrics-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .metric-box {
+        background: rgba(255, 255, 255, .03);
+        border: 1px solid rgba(255, 255, 255, .06);
+        padding: 1.2rem;
+      }
+
+      .metric-box-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.4rem;
+      }
+
+      .metric-box-val {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        color: var(--white);
+        margin-bottom: 0.2rem;
+      }
+
+      .metric-box-sub {
+        font-size: 0.72rem;
+        color: rgba(255, 255, 255, .35);
+      }
+
+      .mused-gallery {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-rows: 200px 200px;
+        gap: 0.6rem;
+        margin: 3rem 0;
+      }
+
+      .mused-gallery-item {
+        overflow: hidden;
+        border-radius: 1px;
+      }
+
+      .mused-gallery-item.g1 {
+        grid-row: span 2;
+      }
+
+      .mused-gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.7);
+        transition: transform .5s;
+      }
+
+      .mused-gallery-item:hover img {
+        transform: scale(1.04);
+        filter: brightness(.85);
+      }
+
+      .phases-section {
+        margin-top: 3rem;
+      }
+
+      .phases-title {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--white);
+        margin-bottom: 2rem;
+      }
+
+      .phases-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+
+      .phase-box {
+        background: rgba(255, 255, 255, .02);
+        border: 1px solid rgba(255, 255, 255, .06);
+        padding: 1.5rem 1.2rem;
+        position: relative;
+        transition: border-color .3s;
+      }
+
+      .phase-box.active {
+        border-color: rgba(201, 168, 76, .25);
+      }
+
+      .phase-box:hover {
+        border-color: rgba(201, 168, 76, .2);
+      }
+
+      .phase-status {
+        font-size: 0.58rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .3);
+        margin-bottom: 0.8rem;
+      }
+
+      .phase-status.active {
+        color: var(--teal-light);
+      }
+
+      .phase-status.planned {
+        color: rgba(201, 168, 76, .5);
+      }
+
+      .phase-box-letter {
+        font-family: var(--font-serif);
+        font-size: 2.5rem;
+        color: rgba(201, 168, 76, .12);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .phase-box-title {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+      }
+
+      .phase-box-desc {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, .4);
+        line-height: 1.7;
+      }
+
+      .sub-projects {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .sub-proj-card {
+        background: rgba(255, 255, 255, .02);
+        border: 1px solid rgba(255, 255, 255, .06);
+        overflow: hidden;
+      }
+
+      .sub-proj-img {
+        height: 220px;
+        overflow: hidden;
+      }
+
+      .sub-proj-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.65);
+        transition: transform .5s;
+      }
+
+      .sub-proj-card:hover .sub-proj-img img {
+        transform: scale(1.04);
+      }
+
+      .sub-proj-body {
+        padding: 2rem;
+      }
+
+      .sub-proj-num {
+        font-family: var(--font-serif);
+        font-size: 3rem;
+        color: rgba(201, 168, 76, .08);
+        line-height: 1;
+        margin-bottom: 0.5rem;
+      }
+
+      .sub-proj-sub {
+        font-size: 0.62rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.4rem;
+      }
+
+      .sub-proj-title {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: var(--white);
+        margin-bottom: 1rem;
+      }
+
+      .sub-proj-desc {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, .5);
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+      }
+
+      .proj-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      .proj-tag {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.7rem;
+        border: 1px solid rgba(201, 168, 76, .2);
+        color: rgba(201, 168, 76, .6);
+      }
+
+      .cta-band {
+        background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+        border-top: 1px solid rgba(201, 168, 76, .15);
+        padding: 4rem 5vw;
+        text-align: center;
+      }
+
+      .cta-band h3 {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: var(--white);
+        margin-bottom: 0.8rem;
+      }
+
+      .cta-band p {
+        color: rgba(255, 255, 255, .45);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+      }
+
+      @media(max-width:900px) {
+        .proj-full-header {
+          grid-template-columns: 1fr;
+        }
+
+        .phases-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .sub-projects {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media(max-width:600px) {
+        .phases-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .proj-metrics-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mused-gallery {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+
+        .mused-gallery-item.g1 {
+          grid-row: span 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="loader">
+      <div class="loader-emblem">
+        <div class="loader-inner">
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+      <div class="loader-text" data-i18n="loader.text">OMORAN-GROUP</div>
+    </div>
+
+    <nav id="main-nav">
+      <div class="nav-brand">
+        <a href="index.html" style="text-decoration:none;"></a>
+        <img class="nav-logo" src="Logo_Prototype.png" alt="OMORAN-GROUP Logo" width="36" height="36">
+        <div class="nav-brand-text">
+          <div class="nav-brand-main">OMORAN-GROUP</div>
+          <div class="nav-brand-sub" data-i18n="nav.sub">Excellence · Finance · West Africa</div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-overlay" id="navOverlay"></div>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="services.html" data-i18n="nav.services">Services</a>
+        <a href="projects.html" class="active" data-i18n="nav.projects">Projects</a>
+        <a href="regulation.html" data-i18n="nav.regulation">Regulation</a>
+        <a href="free-zone.html" data-i18n="nav.zft">Free Zone</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+        <a href="index.html#contact" class="nav-cta" data-i18n="nav.contact">Contact us</a>
+        <button class="lang-switch" onclick="toggleLang()" id="langBtn">FR</button>
+      </div>
+    </nav>
+
+    <div class="page-hero">
+      <div class="geo-bg"></div>
+      <div class="page-hero-bg-img"></div>
+      <div class="page-hero-content reveal">
+        <div class="page-breadcrumb">
+          <a href="index.html" data-i18n="bc.home">Home</a> &nbsp;/&nbsp;
+          <span data-i18n="bc.projects">Projects</span>
+        </div>
+        <h1 class="page-hero-title">
+          <span data-i18n="projects.hero.title">Our Strategic</span><br>
+          <em data-i18n="projects.hero.em">Projects</em>
+        </h1>
+        <p class="page-hero-desc" data-i18n="projects.hero.desc">Three flagship projects form the pillars of
+          OMORAN-GROUP's regional development — institutional acquisition, legal structuring and free zone integration.
+        </p>
+      </div>
+    </div>
+
+    <!-- PROJECT 01 — MUSED -->
+    <div class="proj-hero-img">
+      <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1920&q=70"
+        alt="MUSED Microfinance Acquisition West Africa" loading="lazy">
+      <div class="proj-hero-img-overlay"></div>
+      <div class="proj-hero-img-caption">
+        <div class="proj-hero-img-title" data-i18n="proj.1.title">MUSED Acquisition — Microfinance Institution</div>
+        <div class="proj-hero-img-badge" data-i18n="proj.1.badge">★ Flagship Project</div>
+      </div>
+    </div>
+
+    <section class="proj-full section section-dark">
+      <div class="geo-bg"></div>
+      <div class="s-eyebrow reveal">
+        <div class="s-eyebrow-line"></div>
+        <span class="s-eyebrow-text" data-i18n="projects.eyebrow.p1">Project 01 — Flagship</span>
+      </div>
+
+      <div class="proj-full-header">
+        <div>
+          <div class="proj-full-sub" data-i18n="proj.1.sub">Microfinance Institution — BCEAO Market Access</div>
+          <h2 class="proj-full-title" data-i18n="proj.1.title">MUSED Acquisition</h2>
+          <p class="proj-full-desc" data-i18n="proj.1.desc">The acquisition of MUSED constitutes OMORAN-GROUP's
+            strategic
+            entry project into the regulated microfinance market. This buyout of a BCEAO-licensed institution opens
+            access without starting from scratch — fast, secure and fully OHADA-compliant.</p>
+        </div>
+        <div class="proj-metrics-grid reveal-right">
+          <div class="metric-box">
+            <div class="metric-box-label" data-i18n="metric.type">Operation Type</div>
+            <div class="metric-box-val" data-i18n="metric.type.val">Share Transfer</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-box-label" data-i18n="metric.licence">Target Licence</div>
+            <div class="metric-box-val" data-i18n="metric.licence.val">BCEAO / UMOA</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-box-label" data-i18n="metric.legal">Legal Framework</div>
+            <div class="metric-box-val" data-i18n="metric.legal.val">OHADA</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-box-label" data-i18n="metric.conf">Confidentiality</div>
+            <div class="metric-box-val" data-i18n="metric.conf.val">NDA Signed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGE GALLERY MUSED -->
+      <div class="mused-gallery reveal">
+        <div class="mused-gallery-item g1"><img src="microfinance.jpg" alt="Microfinance BCEAO West Africa"
+            loading="lazy"></div>
+        <div class="mused-gallery-item"><img
+            src="https://images.unsplash.com/photo-1565514020179-026b92b84bb6?auto=format&fit=crop&w=600&q=70"
+            alt="OHADA legal audit" loading="lazy"></div>
+        <div class="mused-gallery-item"><img
+            src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=600&q=70"
+            alt="Financial negotiation" loading="lazy"></div>
+        <div class="mused-gallery-item"><img
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=70"
+            alt="Due diligence team" loading="lazy"></div>
+        <div class="mused-gallery-item"><img
+            src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=70"
+            alt="Microfinance clients West Africa" loading="lazy"></div>
+      </div>
+
+      <!-- PHASES -->
+      <div class="phases-section reveal">
+        <div class="phases-title" data-i18n="projects.phases.title">Acquisition Roadmap — 8 Phases</div>
+        <div class="phases-grid">
+          <div class="phase-box active">
+            <div class="phase-status active" data-i18n="status.ongoing">Ongoing</div>
+            <div class="phase-box-letter">A</div>
+            <div class="phase-box-title" data-i18n="phase.a.title">Strategic Framing</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+          <div class="phase-box active">
+            <div class="phase-status active" data-i18n="status.ongoing">Ongoing</div>
+            <div class="phase-box-letter">B</div>
+            <div class="phase-box-title" data-i18n="phase.b.title">Due Diligence</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+          <div class="phase-box">
+            <div class="phase-status planned" data-i18n="status.planned">Planned</div>
+            <div class="phase-box-letter">C</div>
+            <div class="phase-box-title" data-i18n="phase.c.title">Purchase Offer</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+          <div class="phase-box">
+            <div class="phase-status planned" data-i18n="status.planned">Planned</div>
+            <div class="phase-box-letter">D</div>
+            <div class="phase-box-title" data-i18n="phase.d.title">Structuring</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+          <div class="phase-box">
+            <div class="phase-status planned" data-i18n="status.planned">Planned</div>
+            <div class="phase-box-letter">E</div>
+            <div class="phase-box-title" data-i18n="phase.e.title">Negotiation</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+          <div class="phase-box">
+            <div class="phase-status planned" data-i18n="status.planned">Planned</div>
+            <div class="phase-box-letter">F</div>
+            <div class="phase-box-title" data-i18n="phase.f.title">Authorisations</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+          <div class="phase-box">
+            <div class="phase-status planned" data-i18n="status.planned">Planned</div>
+            <div class="phase-box-letter">G</div>
+            <div class="phase-box-title" data-i18n="phase.g.title">Finalisation</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+          <div class="phase-box">
+            <div class="phase-status planned" data-i18n="status.planned">Planned</div>
+            <div class="phase-box-letter">H</div>
+            <div class="phase-box-title" data-i18n="phase.h.title">Post-Acquisition</div>
+            <a href="index.html#contact" class="btn-gold"
+              style="display:inline-block;font-size:0.68rem;padding:0.75rem 2rem;" data-i18n="proj.1.cta">Join</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS 02 & 03 -->
+    <section class="section section-darker" style="padding-top:3rem;">
+      <div class="geo-bg"></div>
+      <div class="s-eyebrow reveal">
+        <div class="s-eyebrow-line"></div>
+        <span class="s-eyebrow-text" data-i18n="projects.other.eyebrow">Projects 02 &amp; 03</span>
+      </div>
+      <h2 class="s-title reveal d1" data-i18n="projects.other.title">Complementary<br>Development Pillars</h2>
+      <div class="sub-projects">
+        <div class="sub-proj-card reveal d1">
+          <div class="sub-proj-img">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=70"
+              alt="GIE Constitution OHADA" loading="lazy">
+          </div>
+          <div class="sub-proj-body">
+            <div class="sub-proj-num">02</div>
+            <div class="sub-proj-sub" data-i18n="proj.2.sub">Legal Structuring</div>
+            <div class="sub-proj-title" data-i18n="proj.2.title">GIE Constitution — Participation in a GIE project setup
+            </div>
+            <p class="sub-proj-desc" data-i18n="proj.2.desc">Structuring of the Economic Interest Grouping — business
+              plan, partner integration, constitutive general meeting, capital contributions and legal formalities.</p>
+            <div class="proj-tags">
+              <span class="proj-tag" data-i18n="proj.2.tag1">Business Plan</span>
+              <span class="proj-tag" data-i18n="proj.2.tag2">Constitutive GA</span>
+              <span class="proj-tag" data-i18n="proj.2.tag3">OHADA Statutes</span>
+              <span class="proj-tag" data-i18n="proj.2.tag4">Members' Pact</span>
+              <span class="proj-tag" data-i18n="proj.2.tag5">RCCM</span>
+            </div>
+          </div>
+        </div>
+        <div class="sub-proj-card reveal d2">
+          <div class="sub-proj-img">
+            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=70"
+              alt="Togo Free Zone TFZ port" loading="lazy">
+          </div>
+          <div class="sub-proj-body">
+            <div class="sub-proj-num">03</div>
+            <div class="sub-proj-sub" data-i18n="proj.3.sub">Fiscal &amp; Customs Advantage</div>
+            <div class="sub-proj-title" data-i18n="proj.3.title">Joint venture in the Togo Free Zone</div>
+            <p class="sub-proj-desc" data-i18n="proj.3.desc">ZFT file preparation, payment of regulatory fees, official
+              filing and obtaining of provisional licence opening fiscal and customs benefits.</p>
+            <div class="proj-tags">
+              <span class="proj-tag" data-i18n="proj.3.tag1">ZFT File</span>
+              <span class="proj-tag" data-i18n="proj.3.tag2">Provisional Licence</span>
+              <span class="proj-tag" data-i18n="proj.3.tag3">Tax Exemptions</span>
+              <span class="proj-tag" data-i18n="proj.3.tag4">Customs Regime</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-band">
+      <h3 data-i18n="cta.projects.title">Interested in our projects?</h3>
+      <p data-i18n="cta.projects.desc">Contact our team to explore partnership and co-investment opportunities.</p>
+      <a href="index.html#contact" class="btn-gold" style="display:inline-block;" data-i18n="cta.projects.btn">Get in
+        touch</a>
+    </div>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-logo">OMORAN-GROUP</div>
+          <div class="footer-brand-sub" data-i18n="footer.sub">Financial Excellence in West Africa</div>
+          <p class="footer-desc" data-i18n="footer.desc">Economic Interest Grouping structured around financial
+            engineering, strategic asset acquisition and market development in the UEMOA/ECOWAS space, from Lomé, Togo.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.services">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html" data-i18n="svc.1.title">Financial Intermediation</a></li>
+            <li><a href="services.html" data-i18n="svc.2.title">Financial Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.3.title">Legal Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.4.title">Fundraising</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.pages">Pages</div>
+          <ul class="footer-links">
+            <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="regulation.html" data-i18n="nav.regulation">Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Free Zone</a></li>
+            <li><a href="news.html" data-i18n="nav.news">News</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.legal">Legal Framework</div>
+          <ul class="footer-links">
+            <li><a href="regulation.html" data-i18n="nav.regulation">UEMOA Regulation</a></li>
+            <li><a href="regulation.html" data-i18n="footer.ecowas">ECOWAS Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Togo Free Zone</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 OMORAN-GROUP — <span data-i18n="footer.rights">All rights
+            reserved</span></span>
+        <span class="footer-compliance">UEMOA · ECOWAS · OHADA · ZFT <span
+            data-i18n="footer.compliant">Compliant</span></span>
+      </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.news.meta">News — OMORAN-GROUP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+      .page-hero {
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 140px 5vw 5rem;
+        position: relative;
+        overflow: hidden;
+        background: var(--navy-mid);
+      }
+
+      .page-hero .geo-bg {
+        opacity: 0.04;
+      }
+
+      .page-hero-bg-img {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1920&q=60') center/cover no-repeat;
+        opacity: 0.1;
+      }
+
+      .page-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+      }
+
+      .page-breadcrumb {
+        font-size: .65rem;
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .35);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-breadcrumb a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+
+      .page-hero-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        color: var(--white);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-hero-title em {
+        font-style: italic;
+        color: var(--gold-light);
+        display: block;
+      }
+
+      .page-hero-desc {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, .55);
+        line-height: 1.9;
+        max-width: 560px;
+        border-left: 2px solid var(--gold-dark);
+        padding-left: 1.2rem;
+      }
+
+      /* FEATURED BANNER */
+      .featured-news-banner {
+        width: 100%;
+        height: 500px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .featured-news-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.55);
+      }
+
+      .featured-news-banner-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 20%, rgba(10, 22, 40, .95) 100%);
+      }
+
+      .featured-news-banner-content {
+        position: absolute;
+        bottom: 3rem;
+        left: 5vw;
+        right: 5vw;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: end;
+      }
+
+      .fn-badge {
+        display: inline-block;
+        font-size: .58rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        padding: .3rem .8rem;
+        background: var(--gold);
+        color: var(--navy);
+        font-weight: 700;
+        border-radius: 1px;
+        margin-bottom: .8rem;
+      }
+
+      .fn-date {
+        font-size: .62rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        margin-bottom: .6rem;
+      }
+
+      .fn-title {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: var(--white);
+        line-height: 1.2;
+        margin-bottom: .8rem;
+      }
+
+      .fn-excerpt {
+        font-size: .85rem;
+        color: rgba(255, 255, 255, .55);
+        line-height: 1.8;
+      }
+
+      .fn-link {
+        display: inline-block;
+        margin-top: 1.2rem;
+        font-size: .7rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-decoration: none;
+        transition: color .2s;
+      }
+
+      .fn-link:hover {
+        color: var(--gold-light);
+      }
+
+      /* NEWS GRID */
+      .news-main {
+        padding: 5rem 5vw;
+        background: var(--navy-mid);
+      }
+
+      .news-filter {
+        display: flex;
+        gap: .6rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        font-size: .65rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        padding: .4rem 1rem;
+        border: 1px solid rgba(255, 255, 255, .1);
+        background: none;
+        color: rgba(255, 255, 255, .5);
+        cursor: pointer;
+        border-radius: 1px;
+        transition: all .2s;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        border-color: var(--gold);
+        color: var(--gold-light);
+        background: rgba(201, 168, 76, .06);
+      }
+
+      .news-grid-full {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .nc {
+        background: rgba(255, 255, 255, .02);
+        border: 1px solid rgba(255, 255, 255, .06);
+        border-radius: 2px;
+        overflow: hidden;
+        transition: transform .3s, border-color .3s;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nc:hover {
+        transform: translateY(-4px);
+        border-color: rgba(201, 168, 76, .25);
+      }
+
+      .nc-img {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .nc-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .5s;
+        filter: brightness(.75);
+      }
+
+      .nc:hover .nc-img img {
+        transform: scale(1.07);
+        filter: brightness(.9);
+      }
+
+      .nc-img::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 40%, rgba(10, 22, 40, .7) 100%);
+      }
+
+      .nc-header {
+        padding: 1rem 1.4rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nc-date {
+        font-size: .6rem;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: var(--teal-light);
+      }
+
+      .nc-source {
+        font-size: .6rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .3);
+        padding: .2rem .5rem;
+        border: 1px solid rgba(255, 255, 255, .08);
+        border-radius: 1px;
+      }
+
+      .nc-body {
+        padding: 1rem 1.4rem 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nc-cat {
+        font-size: .58rem;
+        letter-spacing: .15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: .5rem;
+      }
+
+      .nc-title {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        color: var(--white);
+        line-height: 1.3;
+        margin-bottom: .6rem;
+      }
+
+      .nc-excerpt {
+        font-size: .8rem;
+        color: rgba(255, 255, 255, .45);
+        line-height: 1.75;
+        flex: 1;
+        margin-bottom: 1rem;
+      }
+
+      .nc-link {
+        font-size: .68rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-decoration: none;
+        transition: color .2s;
+      }
+
+      .nc-link:hover {
+        color: var(--gold-light);
+      }
+
+      /* TICKER */
+      .ticker-band {
+        background: var(--navy);
+        border-top: 1px solid rgba(201, 168, 76, .1);
+        border-bottom: 1px solid rgba(201, 168, 76, .1);
+        padding: 1rem 5vw;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .ticker-inner {
+        display: flex;
+        gap: 4rem;
+        align-items: center;
+        animation: ticker-scroll 30s linear infinite;
+        white-space: nowrap;
+      }
+
+      @keyframes ticker-scroll {
+        0% {
+          transform: translateX(0)
+        }
+
+        100% {
+          transform: translateX(-50%)
+        }
+      }
+
+      .ticker-item {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        font-size: .72rem;
+      }
+
+      .ticker-label {
+        color: rgba(255, 255, 255, .35);
+        letter-spacing: .08em;
+      }
+
+      .ticker-val {
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      .ticker-change.up {
+        color: var(--teal-light);
+      }
+
+      .ticker-change.dn {
+        color: #E07070;
+      }
+
+      /* NEWSLETTER */
+      .newsletter {
+        padding: 4rem 5vw;
+        background: var(--navy);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .newsletter h3 {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        color: var(--white);
+        margin-bottom: .6rem;
+      }
+
+      .newsletter p {
+        font-size: .88rem;
+        color: rgba(255, 255, 255, .45);
+        margin-bottom: 2rem;
+      }
+
+      .newsletter-form {
+        display: flex;
+        gap: 0;
+        max-width: 460px;
+        width: 100%;
+      }
+
+      .newsletter-input {
+        flex: 1;
+        padding: .85rem 1.2rem;
+        background: rgba(255, 255, 255, .05);
+        border: 1px solid rgba(255, 255, 255, .12);
+        border-right: none;
+        color: var(--white);
+        font-size: .85rem;
+        font-family: var(--font-sans);
+        border-radius: 1px 0 0 1px;
+        outline: none;
+      }
+
+      .newsletter-input::placeholder {
+        color: rgba(255, 255, 255, .3);
+      }
+
+      .newsletter-input:focus {
+        border-color: rgba(201, 168, 76, .3);
+      }
+
+      .newsletter-btn {
+        padding: .85rem 1.5rem;
+        background: var(--gold);
+        color: var(--navy);
+        font-size: .72rem;
+        font-weight: 600;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        border-radius: 0 1px 1px 0;
+        font-family: var(--font-sans);
+        transition: background .2s;
+      }
+
+      .newsletter-btn:hover {
+        background: var(--gold-light);
+      }
+
+      @media(max-width:900px) {
+        .featured-news-banner-content {
+          grid-template-columns: 1fr;
+        }
+
+        .news-grid-full {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .featured-news-banner {
+          height: 380px;
+        }
+      }
+
+      @media(max-width:600px) {
+        .news-grid-full {
+          grid-template-columns: 1fr;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .newsletter-input {
+          border-right: 1px solid rgba(255, 255, 255, .12);
+          border-bottom: none;
+          border-radius: 1px 1px 0 0;
+        }
+
+        .newsletter-btn {
+          border-radius: 0 0 1px 1px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="loader">
+      <div class="loader-emblem">
+        <div class="loader-inner">
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+      <div class="loader-text" data-i18n="loader.text">OMORAN-GROUP</div>
+    </div>
+
+    <nav id="main-nav">
+      <div class="nav-brand">
+        <img class="nav-logo" src="Logo_Prototype.png" alt="OMORAN-GROUP Logo" width="36" height="36">
+        <div class="nav-brand-text">
+          <a href="index.html" style="text-decoration:none;"></a>
+          <div class="nav-brand-main">OMORAN-GROUP</div>
+          <div class="nav-brand-sub" data-i18n="nav.sub">Excellence · Finance · West Africa</div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-overlay" id="navOverlay"></div>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="services.html" data-i18n="nav.services">Services</a>
+        <a href="projects.html" data-i18n="nav.projects">Projects</a>
+        <a href="regulation.html" data-i18n="nav.regulation">Regulation</a>
+        <a href="free-zone.html" data-i18n="nav.zft">Free Zone</a>
+        <a href="news.html" class="active" data-i18n="nav.news">News</a>
+        <a href="index.html#contact" class="nav-cta" data-i18n="nav.contact">Contact us</a>
+        <button class="lang-switch" onclick="toggleLang()" id="langBtn">FR</button>
+      </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="geo-bg"></div>
+      <div class="page-hero-bg-img"></div>
+      <div class="page-hero-content reveal">
+        <div class="page-breadcrumb">
+          <a href="index.html" data-i18n="bc.home">Home</a> &nbsp;/&nbsp;
+          <span data-i18n="bc.news">News</span>
+        </div>
+        <h1 class="page-hero-title">
+          <span data-i18n="news.hero.title">African Financial &amp; Legal</span><br>
+          <em data-i18n="news.hero.em">Intelligence</em>
+        </h1>
+        <p class="page-hero-desc" data-i18n="news.subtitle">Curated regulatory, monetary and strategic updates from the
+          UEMOA, ECOWAS and continental financial ecosystem.</p>
+      </div>
+    </div>
+
+    <!-- MARKET TICKER -->
+    <div class="ticker-band">
+      <div class="ticker-inner">
+        <div class="ticker-item"><span class="ticker-label">BRVM Composite</span><span
+            class="ticker-val">218.45</span><span class="ticker-change up">▲ +1.2%</span></div>
+        <div class="ticker-item"><span class="ticker-label">USD/XOF</span><span class="ticker-val">610.50</span><span
+            class="ticker-change dn">▼ -0.3%</span></div>
+        <div class="ticker-item"><span class="ticker-label" data-i18n="ticker.bceao">BCEAO Rate</span><span
+            class="ticker-val">3.50%</span><span class="ticker-change">—</span></div>
+        <div class="ticker-item"><span class="ticker-label">EUR/XOF</span><span class="ticker-val">655.96</span><span
+            class="ticker-change up">▲ +0.1%</span></div>
+        <div class="ticker-item"><span class="ticker-label" data-i18n="ticker.zft">TFZ FDI Q1</span><span
+            class="ticker-val">+12%</span><span class="ticker-change up">▲ YoY</span></div>
+        <div class="ticker-item"><span class="ticker-label" data-i18n="ticker.ecowas">ECOWAS GDP</span><span
+            class="ticker-val">$704B</span><span class="ticker-change up">▲ +4.8%</span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="ticker-item"><span class="ticker-label">BRVM Composite</span><span
+            class="ticker-val">218.45</span><span class="ticker-change up">▲ +1.2%</span></div>
+        <div class="ticker-item"><span class="ticker-label">USD/XOF</span><span class="ticker-val">610.50</span><span
+            class="ticker-change dn">▼ -0.3%</span></div>
+        <div class="ticker-item"><span class="ticker-label" data-i18n="ticker.bceao">BCEAO Rate</span><span
+            class="ticker-val">3.50%</span><span class="ticker-change">—</span></div>
+        <div class="ticker-item"><span class="ticker-label">EUR/XOF</span><span class="ticker-val">655.96</span><span
+            class="ticker-change up">▲ +0.1%</span></div>
+        <div class="ticker-item"><span class="ticker-label" data-i18n="ticker.zft">TFZ FDI Q1</span><span
+            class="ticker-val">+12%</span><span class="ticker-change up">▲ YoY</span></div>
+        <div class="ticker-item"><span class="ticker-label" data-i18n="ticker.ecowas">ECOWAS GDP</span><span
+            class="ticker-val">$704B</span><span class="ticker-change up">▲ +4.8%</span></div>
+      </div>
+    </div>
+
+    <!-- FEATURED NEWS -->
+    <div class="featured-news-banner">
+      <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1920&q=70"
+        alt="ECOWAS digital currency" loading="lazy">
+      <div class="featured-news-banner-overlay"></div>
+      <div class="featured-news-banner-content">
+        <div>
+          <span class="fn-badge" data-i18n="news.badge.featured">★ Featured</span>
+          <div class="fn-date" data-i18n="news.1.date">09 May 2026</div>
+          <div class="fn-title" data-i18n="news.1.title">ECOWAS Greenlights Regional Digital Currency Framework</div>
+        </div>
+        <div>
+          <p class="fn-excerpt" data-i18n="news.1.excerpt">The ECOWAS Authority of Heads of State has approved the
+            preliminary framework for a regional central bank digital currency (CBDC), paving the way for unified
+            digital payment infrastructure across all 15 member states by 2028.</p>
+          <a href="#" class="fn-link" data-i18n="news.readmore">Read full analysis →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEWS GRID -->
+    <section class="news-main">
+      <div class="s-eyebrow reveal">
+        <div class="s-eyebrow-line"></div>
+        <span class="s-eyebrow-text" data-i18n="news.eyebrow.latest">Latest Updates</span>
+      </div>
+      <h2 class="s-title reveal d1" style="margin-bottom:2rem;" data-i18n="news.title">Recent News &amp;<br>Market
+        Intelligence</h2>
+
+      <div class="news-filter reveal">
+        <button class="filter-btn active" data-i18n="news.filter.all">All</button>
+        <button class="filter-btn" data-i18n="news.filter.bceao">BCEAO</button>
+        <button class="filter-btn" data-i18n="news.filter.ecowas">ECOWAS</button>
+        <button class="filter-btn" data-i18n="news.filter.togo">Togo</button>
+        <button class="filter-btn" data-i18n="news.filter.markets">Markets</button>
+        <button class="filter-btn" data-i18n="news.filter.reg">Regulation</button>
+      </div>
+
+      <div class="news-grid-full">
+        <!-- Card 1 -->
+        <div class="nc reveal d1">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=600&q=70"
+              alt="BCEAO interest rate West Africa" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.2.date">07 May 2026</span>
+            <span class="nc-source">BCEAO</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.monetary">Monetary Policy</div>
+            <div class="nc-title" data-i18n="news.2.title">BCEAO Maintains Key Interest Rate at 3.5%</div>
+            <p class="nc-excerpt" data-i18n="news.2.excerpt">The Monetary Policy Committee keeps the key rate unchanged,
+              citing controlled inflation at 3.2% and resilient regional growth projections for Q3 2026.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="nc reveal d2">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=70"
+              alt="Togo Free Zone port growth" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.3.date">05 May 2026</span>
+            <span class="nc-source">TFZ Togo</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.togo">Togo Free Zone</div>
+            <div class="nc-title" data-i18n="news.3.title">Togo Free Zone Reports 12% Growth in Q1 2026</div>
+            <p class="nc-excerpt" data-i18n="news.3.excerpt">Foreign direct investment within the TFZ surged by 12% in
+              Q1, driven by fintech, logistics and agribusiness sectors seeking ECOWAS hub positioning.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="nc reveal d3">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=600&q=70"
+              alt="BRVM capital markets West Africa" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.4.date">02 May 2026</span>
+            <span class="nc-source">BRVM</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.markets">Capital Markets</div>
+            <div class="nc-title" data-i18n="news.4.title">West African Capital Markets Integration Accelerates</div>
+            <p class="nc-excerpt" data-i18n="news.4.excerpt">BRVM and Nigerian Stock Exchange announce a landmark
+              interoperability protocol enabling cross-border securities trading and unified clearing for UEMOA
+              investors.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="nc reveal d1">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=600&q=70"
+              alt="Fintech mobile banking West Africa" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.5.date">28 Apr 2026</span>
+            <span class="nc-source">Fintech</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.digital">Digital Finance</div>
+            <div class="nc-title" data-i18n="news.5.title">Mobile Money Transactions Hit $180B Across ECOWAS in 2025
+            </div>
+            <p class="nc-excerpt" data-i18n="news.5.excerpt">West Africa's mobile money ecosystem reached a record $180
+              billion in transaction value last year, with Togo posting the highest year-on-year growth rate at 34%.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="nc reveal d2">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&w=600&q=70"
+              alt="OHADA reform 2026 West Africa" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.6.date">22 Apr 2026</span>
+            <span class="nc-source">OHADA</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.legal">Legal Framework</div>
+            <div class="nc-title" data-i18n="news.6.title">OHADA Launches Consultation on Uniform Act Modernisation
+            </div>
+            <p class="nc-excerpt" data-i18n="news.6.excerpt">The OHADA secretariat has launched a public consultation on
+              proposed amendments to the Uniform Acts on Commercial Companies, aiming to streamline corporate governance
+              requirements across all 17 member states.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="nc reveal d3">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1532619675605-1ede6c2ed2b0?auto=format&fit=crop&w=600&q=70"
+              alt="microfinance development Africa" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.7.date">18 Apr 2026</span>
+            <span class="nc-source">BCEAO</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.microfinance">Microfinance</div>
+            <div class="nc-title" data-i18n="news.7.title">BCEAO Tightens Microfinance Licensing Framework</div>
+            <p class="nc-excerpt" data-i18n="news.7.excerpt">New BCEAO circular reinforces prudential ratios and
+              governance requirements for licensed microfinance institutions across the WAEMU zone, effective Q3 2026.
+            </p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 7 -->
+        <div class="nc reveal d1">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=70"
+              alt="West Africa infrastructure investment" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.8.date">10 Apr 2026</span>
+            <span class="nc-source">AfDB</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.investment">Investment</div>
+            <div class="nc-title" data-i18n="news.8.title">AfDB Approves $2.4B Infrastructure Package for ECOWAS</div>
+            <p class="nc-excerpt" data-i18n="news.8.excerpt">The African Development Bank has approved a landmark $2.4
+              billion infrastructure financing package for West Africa, prioritising logistics corridors, digital
+              connectivity and energy transition projects.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 8 -->
+        <div class="nc reveal d2">
+          <div class="nc-img"><img
+              src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=600&q=70"
+              alt="ECOWAS summit Abuja" loading="lazy"></div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.9.date">04 Apr 2026</span>
+            <span class="nc-source">ECOWAS</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.integration">Regional Integration</div>
+            <div class="nc-title" data-i18n="news.9.title">ECOWAS Summit Advances Common Currency Roadmap</div>
+            <p class="nc-excerpt" data-i18n="news.9.excerpt">Heads of state at the Abuja summit endorsed an accelerated
+              roadmap for the ECO common currency, with a revised target date of 2030 and agreement on convergence
+              criteria harmonisation.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+        <!-- Card 9 -->
+        <div class="nc reveal d3">
+          <div class="nc-img"><img src="Lomé_Port_Expansion_Togo.jpg" alt="Lomé port expansion Togo" loading="lazy">
+          </div>
+          <div class="nc-header">
+            <span class="nc-date" data-i18n="news.10.date">28 Mar 2026</span>
+            <span class="nc-source">PAL</span>
+          </div>
+          <div class="nc-body">
+            <div class="nc-cat" data-i18n="news.cat.infrastructure">Infrastructure</div>
+            <div class="nc-title" data-i18n="news.10.title">Port Autonome de Lomé Inaugurates Third Container Terminal
+            </div>
+            <p class="nc-excerpt" data-i18n="news.10.excerpt">Togo's Port Autonome de Lomé has opened its third
+              deep-water container terminal, increasing annual handling capacity to 3.5 million TEUs and cementing
+              Lomé's position as the premier logistics hub of the Gulf of Guinea.</p>
+            <a href="#" class="nc-link" data-i18n="news.readmore">Read analysis →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter">
+      <h3 data-i18n="newsletter.title">Stay Informed</h3>
+      <p data-i18n="newsletter.desc">Subscribe to OMORAN-GROUP's weekly West Africa Financial Intelligence briefing.</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" data-i18n-placeholder="newsletter.placeholder"
+          placeholder="your@email.com">
+        <button class="newsletter-btn" data-i18n="newsletter.btn">Subscribe</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-logo">OMORAN-GROUP</div>
+          <div class="footer-brand-sub" data-i18n="footer.sub">Financial Excellence in West Africa</div>
+          <p class="footer-desc" data-i18n="footer.desc">Economic Interest Grouping structured around financial
+            engineering, strategic asset acquisition and market development in the UEMOA/ECOWAS space, from Lomé, Togo.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.services">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html" data-i18n="svc.1.title">Financial Intermediation</a></li>
+            <li><a href="services.html" data-i18n="svc.2.title">Financial Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.3.title">Legal Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.4.title">Fundraising</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.pages">Pages</div>
+          <ul class="footer-links">
+            <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="regulation.html" data-i18n="nav.regulation">Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Free Zone</a></li>
+            <li><a href="news.html" data-i18n="nav.news">News</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.legal">Legal Framework</div>
+          <ul class="footer-links">
+            <li><a href="regulation.html" data-i18n="nav.regulation">UEMOA Regulation</a></li>
+            <li><a href="regulation.html" data-i18n="footer.ecowas">ECOWAS Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Togo Free Zone</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 OMORAN-GROUP — <span data-i18n="footer.rights">All rights
+            reserved</span></span>
+        <span class="footer-compliance">UEMOA · ECOWAS · OHADA · ZFT <span
+            data-i18n="footer.compliant">Compliant</span></span>
+      </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+  </body>
+
+</html>

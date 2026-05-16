@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page.admin.meta">GIE DYNAMIC — Back-office Admin</title>
+  <style>
+    :root {
+      --bg:       #0d1117;
+      --bg2:      #161b22;
+      --bg3:      #1c2128;
+      --border:   #30363d;
+      --gold:     #c9a84c;
+      --gold-l:   #e8bf6a;
+      --teal:     #1a8c7a;
+      --teal-l:   #24c9af;
+      --red:      #c9444c;
+      --text:     #e6edf3;
+      --muted:    #8b949e;
+      --font:     'Segoe UI', system-ui, sans-serif;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { font-size:14px; }
+    body { font-family:var(--font); background:var(--bg); color:var(--text); display:flex; min-height:100vh; }
+
+    /* ── SIDEBAR ── */
+    aside {
+      width:240px; flex-shrink:0;
+      background:var(--bg2);
+      border-right:1px solid var(--border);
+      display:flex; flex-direction:column;
+      position:fixed; top:0; left:0; bottom:0; overflow-y:auto; z-index:10;
+    }
+    .sidebar-logo {
+      padding:1.5rem 1.2rem 1rem;
+      border-bottom:1px solid var(--border);
+    }
+    .sidebar-logo-title {
+      font-size:1rem; font-weight:700; letter-spacing:.1em;
+      background:linear-gradient(135deg,var(--gold-l),var(--gold));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .sidebar-logo-sub { font-size:.7rem; color:var(--muted); margin-top:2px; }
+    .sidebar-section { padding:.6rem 0; border-bottom:1px solid var(--border); }
+    .sidebar-section-title {
+      padding:.3rem 1.2rem .2rem;
+      font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted);
+    }
+    .sidebar-link {
+      display:flex; align-items:center; gap:.6rem;
+      padding:.55rem 1.2rem; font-size:.82rem; color:var(--muted);
+      cursor:pointer; border:none; background:none; width:100%; text-align:left;
+      transition:background .15s, color .15s; border-left:2px solid transparent;
+    }
+    .sidebar-link:hover { background:rgba(255,255,255,.04); color:var(--text); }
+    .sidebar-link.active { background:rgba(201,168,76,.08); color:var(--gold-l); border-left-color:var(--gold); }
+    .sidebar-link .ico { width:16px; text-align:center; font-size:.9rem; }
+    .sidebar-footer { margin-top:auto; padding:1rem 1.2rem; border-top:1px solid var(--border); }
+    .version-badge { font-size:.65rem; color:var(--muted); }
+
+    /* ── MAIN ── */
+    main { margin-left:240px; flex:1; display:flex; flex-direction:column; min-height:100vh; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background:var(--bg2); border-bottom:1px solid var(--border);
+      padding:.8rem 2rem; display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:9;
+    }
+    .topbar-title { font-size:.95rem; font-weight:600; }
+    .topbar-actions { display:flex; gap:.6rem; align-items:center; }
+    .lang-tabs { display:flex; background:var(--bg3); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+    .lang-tab {
+      padding:.3rem .8rem; font-size:.75rem; letter-spacing:.06em; cursor:pointer;
+      border:none; background:none; color:var(--muted); font-family:var(--font); transition:all .15s;
+    }
+    .lang-tab.active { background:var(--gold); color:#000; font-weight:600; }
+    .btn { padding:.4rem .9rem; border-radius:4px; border:none; cursor:pointer; font-size:.78rem; font-family:var(--font); font-weight:500; transition:all .15s; }
+    .btn-primary { background:var(--gold); color:#000; }
+    .btn-primary:hover { background:var(--gold-l); }
+    .btn-secondary { background:var(--bg3); color:var(--text); border:1px solid var(--border); }
+    .btn-secondary:hover { border-color:var(--gold); color:var(--gold-l); }
+    .btn-danger  { background:rgba(201,68,76,.15); color:var(--red); border:1px solid rgba(201,68,76,.3); }
+    .btn-danger:hover { background:rgba(201,68,76,.25); }
+    .btn-success { background:var(--teal); color:#fff; }
+    .btn-success:hover { background:var(--teal-l); }
+
+    /* ── PANEL ── */
+    .panel { display:none; padding:2rem; flex:1; }
+    .panel.active { display:block; }
+    .panel-title { font-size:1.1rem; font-weight:600; margin-bottom:.4rem; }
+    .panel-desc { font-size:.8rem; color:var(--muted); margin-bottom:1.8rem; }
+
+    /* ── CARDS DASHBOARD ── */
+    .dashboard-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:2rem; }
+    .dash-card { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:1.2rem 1.4rem; }
+    .dash-card-label { font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.4rem; }
+    .dash-card-val { font-size:1.8rem; font-weight:700; color:var(--gold-l); }
+    .dash-card-sub { font-size:.7rem; color:var(--muted); margin-top:.2rem; }
+
+    .activity-feed { background:var(--bg2); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+    .activity-feed-header { padding:.8rem 1.2rem; border-bottom:1px solid var(--border); font-size:.82rem; font-weight:600; }
+    .activity-item { display:flex; align-items:center; gap:.8rem; padding:.65rem 1.2rem; border-bottom:1px solid rgba(48,54,61,.5); font-size:.78rem; }
+    .activity-item:last-child { border-bottom:none; }
+    .activity-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .activity-dot.gold { background:var(--gold); }
+    .activity-dot.teal { background:var(--teal-l); }
+    .activity-dot.red  { background:var(--red); }
+    .activity-text { flex:1; color:var(--text); }
+    .activity-time { color:var(--muted); font-size:.7rem; }
+
+    /* ── TABLE TRANSLATIONS ── */
+    .search-bar { display:flex; gap:.6rem; margin-bottom:1rem; }
+    .search-input { flex:1; padding:.5rem .8rem; background:var(--bg3); border:1px solid var(--border); border-radius:4px; color:var(--text); font-size:.82rem; font-family:var(--font); outline:none; }
+    .search-input:focus { border-color:var(--gold); }
+    .page-filter { padding:.5rem .8rem; background:var(--bg3); border:1px solid var(--border); border-radius:4px; color:var(--text); font-size:.78rem; font-family:var(--font); cursor:pointer; outline:none; }
+    .trans-table { width:100%; border-collapse:collapse; background:var(--bg2); border-radius:6px; overflow:hidden; }
+    .trans-table th { padding:.7rem 1rem; text-align:left; font-size:.65rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); background:var(--bg3); border-bottom:1px solid var(--border); }
+    .trans-table td { padding:.55rem 1rem; border-bottom:1px solid rgba(48,54,61,.5); font-size:.78rem; vertical-align:top; }
+    .trans-table tr:last-child td { border-bottom:none; }
+    .trans-table tr:hover td { background:rgba(255,255,255,.02); }
+    .key-cell { font-family:monospace; font-size:.73rem; color:var(--gold); white-space:nowrap; }
+    .val-input {
+      width:100%; padding:.35rem .5rem; background:var(--bg3); border:1px solid var(--border);
+      border-radius:3px; color:var(--text); font-size:.78rem; font-family:var(--font);
+      resize:vertical; min-height:32px; outline:none; transition:border-color .15s;
+    }
+    .val-input:focus { border-color:var(--gold); }
+    .val-input.modified { border-color:var(--teal); background:rgba(26,140,122,.06); }
+    .page-badge {
+      font-size:.58rem; padding:.15rem .5rem; border-radius:3px; background:rgba(201,168,76,.1);
+      color:var(--gold); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;
+    }
+
+    /* ── IMAGES ── */
+    .img-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .img-card { background:var(--bg2); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+    .img-preview { width:100%; height:140px; object-fit:cover; display:block; background:var(--bg3); }
+    .img-preview-placeholder { width:100%; height:140px; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:1.5rem; color:var(--muted); }
+    .img-body { padding:.8rem; }
+    .img-key { font-family:monospace; font-size:.68rem; color:var(--gold); margin-bottom:.4rem; }
+    .img-url-input { width:100%; padding:.35rem .5rem; background:var(--bg3); border:1px solid var(--border); border-radius:3px; color:var(--text); font-size:.72rem; font-family:var(--font); outline:none; margin-bottom:.5rem; }
+    .img-url-input:focus { border-color:var(--gold); }
+    .img-actions { display:flex; gap:.4rem; }
+
+    /* ── NEWS EDITOR ── */
+    .news-list { display:flex; flex-direction:column; gap:.6rem; }
+    .news-item { background:var(--bg2); border:1px solid var(--border); border-radius:6px; overflow:hidden; }
+    .news-item-header { display:flex; align-items:center; gap:.8rem; padding:.8rem 1rem; cursor:pointer; transition:background .15s; }
+    .news-item-header:hover { background:rgba(255,255,255,.03); }
+    .news-num { font-family:monospace; font-size:.72rem; color:var(--gold); min-width:28px; }
+    .news-title-preview { font-size:.82rem; color:var(--text); flex:1; }
+    .news-date-preview { font-size:.72rem; color:var(--muted); }
+    .news-chevron { color:var(--muted); font-size:.8rem; transition:transform .2s; }
+    .news-item.open .news-chevron { transform:rotate(90deg); }
+    .news-body { display:none; padding:1rem; border-top:1px solid var(--border); }
+    .news-item.open .news-body { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+    .field-group { margin-bottom:.6rem; }
+    .field-label { font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.3rem; }
+    .field-input { width:100%; padding:.4rem .6rem; background:var(--bg3); border:1px solid var(--border); border-radius:3px; color:var(--text); font-size:.78rem; font-family:var(--font); outline:none; }
+    .field-input:focus { border-color:var(--gold); }
+    .field-textarea { width:100%; padding:.4rem .6rem; background:var(--bg3); border:1px solid var(--border); border-radius:3px; color:var(--text); font-size:.78rem; font-family:var(--font); outline:none; resize:vertical; min-height:60px; }
+    .field-textarea:focus { border-color:var(--gold); }
+
+    /* ── SETTINGS ── */
+    .settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+    .settings-card { background:var(--bg2); border:1px solid var(--border); border-radius:6px; padding:1.2rem 1.4rem; }
+    .settings-card-title { font-size:.85rem; font-weight:600; margin-bottom:.3rem; }
+    .settings-card-desc { font-size:.74rem; color:var(--muted); margin-bottom:1rem; }
+    .toggle-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:.7rem; }
+    .toggle-label { font-size:.78rem; color:var(--text); }
+    .toggle { position:relative; width:36px; height:20px; }
+    .toggle input { opacity:0; width:0; height:0; }
+    .toggle-slider { position:absolute; inset:0; background:var(--bg3); border:1px solid var(--border); border-radius:20px; cursor:pointer; transition:.2s; }
+    .toggle-slider::before { content:''; position:absolute; height:14px; width:14px; left:2px; bottom:2px; background:var(--muted); border-radius:50%; transition:.2s; }
+    .toggle input:checked + .toggle-slider { background:var(--teal); border-color:var(--teal); }
+    .toggle input:checked + .toggle-slider::before { transform:translateX(16px); background:#fff; }
+
+    /* ── SAVE TOAST ── */
+    #toast {
+      position:fixed; bottom:2rem; right:2rem; z-index:999;
+      background:var(--teal); color:#fff; padding:.7rem 1.3rem; border-radius:6px;
+      font-size:.8rem; font-weight:500; box-shadow:0 4px 20px rgba(0,0,0,.4);
+      transform:translateY(100px); opacity:0; transition:all .3s; pointer-events:none;
+    }
+    #toast.show { transform:translateY(0); opacity:1; }
+
+    /* ── PAGINATION ── */
+    .pagination { display:flex; gap:.3rem; margin-top:1rem; justify-content:flex-end; }
+    .page-btn { padding:.3rem .7rem; background:var(--bg3); border:1px solid var(--border); border-radius:3px; color:var(--muted); font-size:.75rem; cursor:pointer; transition:all .15s; }
+    .page-btn:hover, .page-btn.active { border-color:var(--gold); color:var(--gold-l); }
+
+    @media(max-width:900px){
+      aside { width:200px; }
+      main { margin-left:200px; }
+      .dashboard-grid { grid-template-columns:1fr 1fr; }
+      .img-grid { grid-template-columns:1fr 1fr; }
+      .settings-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ SIDEBAR ════════════════ -->
+<aside>
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-title">GIE DYNAMIC</div>
+    <div class="sidebar-logo-sub">Back-office Admin v4.0</div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Tableau de bord</div>
+    <button class="sidebar-link active" onclick="showPanel('dashboard', this)"><span class="ico">⊞</span> Vue d'ensemble</button>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Contenu</div>
+    <button class="sidebar-link" onclick="showPanel('translations', this)"><span class="ico">🌐</span> Traductions</button>
+    <button class="sidebar-link" onclick="showPanel('images', this)"><span class="ico">🖼</span> Images</button>
+    <button class="sidebar-link" onclick="showPanel('news', this)"><span class="ico">📰</span> Actualités</button>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Pages</div>
+    <button class="sidebar-link" onclick="openPage('index.html')"><span class="ico">🏠</span> Accueil</button>
+    <button class="sidebar-link" onclick="openPage('services.html')"><span class="ico">⚙</span> Services</button>
+    <button class="sidebar-link" onclick="openPage('projects.html')"><span class="ico">📋</span> Projets</button>
+    <button class="sidebar-link" onclick="openPage('regulation.html')"><span class="ico">⚖</span> Réglementation</button>
+    <button class="sidebar-link" onclick="openPage('free-zone.html')"><span class="ico">🏛</span> Zone Franche</button>
+    <button class="sidebar-link" onclick="openPage('news.html')"><span class="ico">📡</span> Actualités</button>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Configuration</div>
+    <button class="sidebar-link" onclick="showPanel('settings', this)"><span class="ico">⚙</span> Paramètres</button>
+    <button class="sidebar-link" onclick="showPanel('export', this)"><span class="ico">↓</span> Export/Import</button>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="version-badge">script.js v4.0 · ~340 clés · EN+FR · 6 pages i18n</div>
+  </div>
+</aside>
+
+<!-- ════════════════ MAIN ════════════════ -->
+<main>
+  <div class="topbar">
+    <div class="topbar-title" id="topbarTitle">Vue d'ensemble</div>
+    <div class="topbar-actions">
+      <div class="lang-tabs">
+        <button class="lang-tab active" onclick="switchEditorLang('fr', this)">FR</button>
+        <button class="lang-tab" onclick="switchEditorLang('en', this)">EN</button>
+      </div>
+      <button class="btn btn-primary" onclick="saveAll()">💾 Enregistrer tout</button>
+      <button class="btn btn-secondary" onclick="exportJSON()">⬇ Export JSON</button>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ── -->
+  <div id="panel-dashboard" class="panel active">
+    <div class="panel-title">Tableau de bord</div>
+    <div class="panel-desc">Vue d'ensemble du site GIE DYNAMIC — toutes les pages sont instrumentées i18n.</div>
+    <div class="dashboard-grid">
+      <div class="dash-card">
+        <div class="dash-card-label">Clés i18n</div>
+        <div class="dash-card-val">~340</div>
+        <div class="dash-card-sub">EN + FR couverts</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-label">Pages i18n</div>
+        <div class="dash-card-val">6</div>
+        <div class="dash-card-sub">index, services, projects, regulation, free-zone, news</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-label">Attributs data-i18n</div>
+        <div class="dash-card-val">100%</div>
+        <div class="dash-card-sub">Nav, hero, content, footer sur toutes pages</div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-label">Actualités</div>
+        <div class="dash-card-val">10</div>
+        <div class="dash-card-sub">Articles configurables EN + FR</div>
+      </div>
+    </div>
+    <div class="activity-feed">
+      <div class="activity-feed-header">Journal des modifications</div>
+      <div class="activity-item"><div class="activity-dot teal"></div><div class="activity-text">script.js v4.0 — ~340 clés EN+FR complètes, moteur i18n corrigé</div><div class="activity-time">Aujourd'hui</div></div>
+      <div class="activity-item"><div class="activity-dot gold"></div><div class="activity-text">news.html — tous data-i18n ajoutés : nav, hero, ticker, 9 cards, newsletter, footer</div><div class="activity-time">Aujourd'hui</div></div>
+      <div class="activity-item"><div class="activity-dot gold"></div><div class="activity-text">free-zone.html — hero stats, why, adv-grid, lomé facts, process, CTA, footer</div><div class="activity-time">Aujourd'hui</div></div>
+      <div class="activity-item"><div class="activity-dot gold"></div><div class="activity-text">regulation.html — régulateurs, deep-dive, table, free-section, vigilance, CTA</div><div class="activity-time">Aujourd'hui</div></div>
+      <div class="activity-item"><div class="activity-dot gold"></div><div class="activity-text">projects.html — phases A–H, métriques, sous-projets 02 &amp; 03, tags</div><div class="activity-time">Aujourd'hui</div></div>
+      <div class="activity-item"><div class="activity-dot gold"></div><div class="activity-text">services.html — 7 services complets, points, tags, CTA</div><div class="activity-time">Aujourd'hui</div></div>
+      <div class="activity-item"><div class="activity-dot teal"></div><div class="activity-text">admin.html v4.0 — compteur pages et clés mis à jour</div><div class="activity-time">Aujourd'hui</div></div>
+      <div class="activity-item"><div class="activity-dot red"></div><div class="activity-text">Correction : data-i18n manquants nav.sub, bc.*, footer.pages, footer.ecowas sur toutes pages secondaires</div><div class="activity-time">Aujourd'hui</div></div>
+    </div>
+  </div>
+
+  <!-- ── TRADUCTIONS ── -->
+  <div id="panel-translations" class="panel">
+    <div class="panel-title">Gestion des traductions</div>
+    <div class="panel-desc">Modifiez les textes EN et FR. Les changements sont appliqués en cliquant sur "Enregistrer tout".</div>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="searchTrans" placeholder="Rechercher une clé ou un texte..." oninput="filterTranslations()">
+      <select class="page-filter" id="pageFilter" onchange="filterTranslations()">
+        <option value="">Toutes les sections</option>
+        <option value="nav.">Navigation</option>
+        <option value="hero.">Hero</option>
+        <option value="svc.">Services</option>
+        <option value="proj.">Projets</option>
+        <option value="phase.">Phases acquisition</option>
+        <option value="reg.">Réglementation</option>
+        <option value="zft.">Zone Franche</option>
+        <option value="news.">Actualités</option>
+        <option value="footer.">Footer</option>
+        <option value="cta.">CTA</option>
+        <option value="metric.">Métriques</option>
+        <option value="vig.">Vigilance</option>
+        <option value="free.">Activités libres</option>
+        <option value="newsletter.">Newsletter</option>
+        <option value="ticker.">Ticker</option>
+        <option value="bc.">Breadcrumbs</option>
+      </select>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="trans-table" id="transTable">
+        <thead><tr><th style="width:220px">Clé</th><th style="width:80px">Section</th><th>Valeur (langue active)</th></tr></thead>
+        <tbody id="transBody"></tbody>
+      </table>
+    </div>
+    <div class="pagination" id="transPagination"></div>
+  </div>
+
+  <!-- ── IMAGES ── -->
+  <div id="panel-images" class="panel">
+    <div class="panel-title">Gestion des images</div>
+    <div class="panel-desc">Remplacez les URLs des images. Utilisez n'importe quelle URL publique accessible.</div>
+    <div class="img-grid" id="imgGrid"></div>
+  </div>
+
+  <!-- ── ACTUALITÉS ── -->
+  <div id="panel-news" class="panel">
+    <div class="panel-title">Gestion des actualités</div>
+    <div class="panel-desc">Modifiez les titres, dates, excerpts et catégories des 10 articles en EN et FR.</div>
+    <div class="news-list" id="newsList"></div>
+  </div>
+
+  <!-- ── PARAMÈTRES ── -->
+  <div id="panel-settings" class="panel">
+    <div class="panel-title">Paramètres du site</div>
+    <div class="panel-desc">Configuration générale du site GIE DYNAMIC.</div>
+    <div class="settings-grid">
+      <div class="settings-card">
+        <div class="settings-card-title">Langue par défaut</div>
+        <div class="settings-card-desc">Langue affichée aux nouveaux visiteurs</div>
+        <div class="toggle-row"><span class="toggle-label">Anglais (EN)</span><label class="toggle"><input type="radio" name="deflang" value="en" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">Français (FR)</span><label class="toggle"><input type="radio" name="deflang" value="fr"><span class="toggle-slider"></span></label></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Détection auto de langue</div>
+        <div class="settings-card-desc">Utilise la langue du navigateur du visiteur</div>
+        <div class="toggle-row"><span class="toggle-label">Activer la détection auto</span><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">Mémoriser le choix (localStorage)</span><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Animations &amp; Performance</div>
+        <div class="settings-card-desc">Gestion des animations de scroll</div>
+        <div class="toggle-row"><span class="toggle-label">Scroll reveal actif</span><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+        <div class="toggle-row"><span class="toggle-label">Respecter prefers-reduced-motion</span><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Newsletter</div>
+        <div class="settings-card-desc">Configuration du formulaire d'abonnement</div>
+        <div class="field-group"><div class="field-label">Email de destination</div><input class="field-input" type="email" value="contact@giedynamic.tg" placeholder="email@example.com"></div>
+        <div class="toggle-row"><span class="toggle-label">Formulaire actif</span><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">Contact</div>
+        <div class="settings-card-desc">Informations de contact GIE DYNAMIC</div>
+        <div class="field-group"><div class="field-label">Email principal</div><input class="field-input" type="email" value="contact@giedynamic.tg"></div>
+        <div class="field-group"><div class="field-label">Téléphone</div><input class="field-input" type="text" value="+228 XX XX XX XX"></div>
+        <div class="field-group"><div class="field-label">Adresse</div><input class="field-input" type="text" value="Lomé, République du Togo"></div>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">SEO &amp; Méta</div>
+        <div class="settings-card-desc">Balises méta pour les moteurs de recherche</div>
+        <div class="field-group"><div class="field-label">Description (EN)</div><textarea class="field-textarea">GIE DYNAMIC — Financial engineering, institutional acquisitions and market development in West Africa.</textarea></div>
+        <div class="field-group"><div class="field-label">Description (FR)</div><textarea class="field-textarea">GIE DYNAMIC — Ingénierie financière, acquisition d'institutions et développement de marchés en Afrique de l'Ouest.</textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EXPORT / IMPORT ── -->
+  <div id="panel-export" class="panel">
+    <div class="panel-title">Export / Import des données</div>
+    <div class="panel-desc">Exportez le dictionnaire complet ou importez-en un existant pour mettre à jour le site.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div class="settings-card">
+        <div class="settings-card-title">⬇ Export JSON</div>
+        <div class="settings-card-desc">Télécharge le dictionnaire complet EN+FR au format JSON, prêt à remplacer la section TRANSLATIONS dans script.js.</div>
+        <button class="btn btn-primary" style="margin-top:.5rem" onclick="exportJSON()">Exporter le dictionnaire</button>
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">⬆ Import JSON</div>
+        <div class="settings-card-desc">Importez un fichier JSON précédemment exporté pour restaurer ou mettre à jour les traductions.</div>
+        <input type="file" id="importFile" accept=".json" style="display:none" onchange="importJSON(this)">
+        <button class="btn btn-secondary" style="margin-top:.5rem" onclick="document.getElementById('importFile').click()">Importer un fichier JSON</button>
+      </div>
+      <div class="settings-card" style="grid-column:span 2">
+        <div class="settings-card-title">📋 Aperçu du dictionnaire actuel</div>
+        <div class="settings-card-desc">Contenu JSON du dictionnaire chargé en mémoire.</div>
+        <textarea id="jsonPreview" style="width:100%;height:300px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;color:var(--text);font-family:monospace;font-size:.72rem;padding:.6rem;outline:none;resize:vertical;margin-top:.6rem" readonly></textarea>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="toast">✓ Modifications enregistrées</div>
+
+<script>
+/* ════════════ ÉTAT DE L'APPLICATION ════════════ */
+let editorLang = 'fr';
+let DICT = null;
+let IMAGES_MAP = null;
+
+async function loadSiteScript() {
+  try {
+    const response = await fetch('assets/js/script.js');
+    const code = await response.text();
+    const iframeEl = document.createElement('iframe');
+    iframeEl.style.display = 'none';
+    document.body.appendChild(iframeEl);
+    const w = iframeEl.contentWindow;
+    try {
+      w.eval(code);
+      DICT       = w.TRANSLATIONS || null;
+      IMAGES_MAP = w.GIE_IMAGES   || null;
+    } catch(e) { /* fallback */ }
+    document.body.removeChild(iframeEl);
+  } catch(e) {
+    console.warn('Script non chargeable (contexte local), mode démo activé');
+  }
+
+  if (!DICT) {
+    DICT = { en: {}, fr: {} };
+    const demoKeys = [
+      'nav.home','nav.services','nav.projects','nav.regulation','nav.zft','nav.news','nav.contact',
+      'hero.title','hero.subtitle','hero.desc',
+      'svc.1.title','svc.1.desc','svc.2.title','svc.2.desc',
+      'proj.1.title','proj.1.desc','proj.2.title','proj.3.title',
+      'footer.sub','footer.desc','footer.rights'
+    ];
+    const demoEN = ['Home','Services','Projects','Regulation','Free Zone','News','Contact us',
+      'Financial & Legal African Hub','Serving the International','GIE DYNAMIC accompanies...',
+      'Financial Intermediation','Connecting investors...','Financial Engineering','Design of complex...',
+      'MUSED Acquisition','The acquisition of MUSED...','GIE DYNAMIC Constitution','Togo Free Zone Licence',
+      'Financial Excellence in West Africa','Economic Interest Grouping...','All rights reserved'];
+    const demoFR = ['Accueil','Services','Projets','Réglementation','Zone Franche','Actualités','Nous contacter',
+      'Hub Financier & Juridique Africain','Au service de l\'international','GIE DYNAMIC accompagne...',
+      'Intermédiation Financière','Mise en relation...','Ingénierie Financière','Conception de montages...',
+      'Acquisition de MUSED','L\'acquisition de MUSED...','Constitution du GIE DYNAMIC','Agrément Zone Franche du Togo',
+      'Excellence Financière en Afrique de l\'Ouest','Groupement d\'Intérêt Économique...','Tous droits réservés'];
+    demoKeys.forEach((k,i) => { DICT.en[k] = demoEN[i]; DICT.fr[k] = demoFR[i]; });
+  }
+
+  if (!IMAGES_MAP) {
+    IMAGES_MAP = {
+      'hero.bg':        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=60',
+      'svc.img.1':      'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=75',
+      'proj.hero':      'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1920&q=70',
+      'reg.body.uemoa': 'https://images.unsplash.com/photo-1598771891506-7d12c2bb31c8?auto=format&fit=crop&w=800&q=70',
+      'zft.why.main':   'https://images.unsplash.com/photo-1567449303078-57ad995bd17f?auto=format&fit=crop&w=800&q=70',
+      'news.featured':  'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1920&q=70',
+    };
+  }
+
+  renderTranslations();
+  renderImages();
+  renderNews();
+  renderJsonPreview();
+}
+
+/* ════════════ NAVIGATION PANNEAUX ════════════ */
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-link').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  const titles = {
+    dashboard:'Vue d\'ensemble', translations:'Traductions', images:'Images',
+    news:'Actualités', settings:'Paramètres', export:'Export / Import'
+  };
+  document.getElementById('topbarTitle').textContent = titles[id] || id;
+}
+
+function openPage(page) { window.open(page, '_blank'); }
+
+/* ════════════ LANGUE ÉDITEUR ════════════ */
+function switchEditorLang(lang, btn) {
+  editorLang = lang;
+  document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderTranslations();
+  renderNews();
+}
+
+/* ════════════ TRADUCTIONS ════════════ */
+let allKeys = [];
+let filteredKeys = [];
+let currentPage = 1;
+const PER_PAGE = 30;
+
+function renderTranslations() {
+  if (!DICT) return;
+  allKeys = Object.keys(DICT.en || {}).concat(
+    Object.keys(DICT.fr || {}).filter(k => !(k in (DICT.en||{})))
+  );
+  allKeys = [...new Set(allKeys)].sort();
+  filterTranslations();
+}
+
+function filterTranslations() {
+  const search  = (document.getElementById('searchTrans')?.value || '').toLowerCase();
+  const section = (document.getElementById('pageFilter')?.value  || '');
+  filteredKeys = allKeys.filter(k => {
+    const matchSection = !section || k.startsWith(section);
+    const valEn = (DICT.en?.[k] || '').toLowerCase();
+    const valFr = (DICT.fr?.[k] || '').toLowerCase();
+    const matchSearch = !search || k.toLowerCase().includes(search) || valEn.includes(search) || valFr.includes(search);
+    return matchSection && matchSearch;
+  });
+  currentPage = 1;
+  renderTranslationsPage();
+}
+
+function renderTranslationsPage() {
+  const tbody = document.getElementById('transBody');
+  const start = (currentPage - 1) * PER_PAGE;
+  const pageKeys = filteredKeys.slice(start, start + PER_PAGE);
+  const dict = DICT[editorLang] || {};
+  tbody.innerHTML = pageKeys.map(key => {
+    const section = key.split('.')[0];
+    return `<tr>
+      <td class="key-cell">${key}</td>
+      <td><span class="page-badge">${section}</span></td>
+      <td><textarea class="val-input" data-key="${key}" oninput="markModified(this)">${(dict[key]||'').replace(/</g,'&lt;')}</textarea></td>
+    </tr>`;
+  }).join('');
+  const totalPages = Math.ceil(filteredKeys.length / PER_PAGE);
+  const pag = document.getElementById('transPagination');
+  let pagHTML = '';
+  for (let i = 1; i <= totalPages; i++) {
+    pagHTML += `<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  pag.innerHTML = pagHTML;
+}
+
+function goPage(n) { currentPage = n; renderTranslationsPage(); }
+function markModified(el) { el.classList.add('modified'); }
+
+/* ════════════ IMAGES ════════════ */
+function renderImages() {
+  if (!IMAGES_MAP) return;
+  const grid = document.getElementById('imgGrid');
+  grid.innerHTML = Object.entries(IMAGES_MAP).map(([key, url]) => `
+    <div class="img-card">
+      <img class="img-preview" src="${url}" alt="${key}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" loading="lazy">
+      <div class="img-preview-placeholder" style="display:none">🖼</div>
+      <div class="img-body">
+        <div class="img-key">${key}</div>
+        <input class="img-url-input" type="text" value="${url}" data-img-key="${key}" oninput="previewImgChange(this)" placeholder="https://...">
+        <div class="img-actions">
+          <button class="btn btn-secondary" style="font-size:.7rem;padding:.3rem .6rem" onclick="applyImgChange(this.parentElement.previousElementSibling)">Aperçu</button>
+          <button class="btn btn-primary"   style="font-size:.7rem;padding:.3rem .6rem" onclick="saveImgChange(this.parentElement.previousElementSibling)">Appliquer</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function previewImgChange(input) {
+  const card = input.closest('.img-card');
+  const img  = card.querySelector('.img-preview');
+  img.style.display = 'block';
+  card.querySelector('.img-preview-placeholder').style.display = 'none';
+  img.src = input.value;
+}
+
+function applyImgChange(input) { previewImgChange(input); }
+function saveImgChange(input) {
+  IMAGES_MAP[input.getAttribute('data-img-key')] = input.value;
+  showToast('Image mise à jour');
+}
+
+/* ════════════ ACTUALITÉS ════════════ */
+function renderNews() {
+  if (!DICT) return;
+  const dict = DICT[editorLang] || {};
+  const list = document.getElementById('newsList');
+  let html = '';
+  for (let i = 1; i <= 10; i++) {
+    const title   = dict[`news.${i}.title`]   || '';
+    const date    = dict[`news.${i}.date`]    || '';
+    const excerpt = dict[`news.${i}.excerpt`] || '';
+    html += `
+    <div class="news-item" id="newsItem${i}">
+      <div class="news-item-header" onclick="toggleNews(${i})">
+        <span class="news-num">N°${i.toString().padStart(2,'0')}</span>
+        <span class="news-title-preview">${title || '(Sans titre)'}</span>
+        <span class="news-date-preview">${date}</span>
+        <span class="news-chevron">›</span>
+      </div>
+      <div class="news-body">
+        <div>
+          <div class="field-group"><div class="field-label">Titre</div><input class="field-input" value="${title.replace(/"/g,'&quot;')}" onchange="updateNewsKey('news.${i}.title',this.value)"></div>
+          <div class="field-group"><div class="field-label">Date</div><input class="field-input" value="${date.replace(/"/g,'&quot;')}" onchange="updateNewsKey('news.${i}.date',this.value)"></div>
+          <div class="field-group"><div class="field-label">Image URL</div><input class="field-input" value="${IMAGES_MAP?.['news.'+i] || ''}" onchange="IMAGES_MAP['news.${i}']=this.value"></div>
+        </div>
+        <div>
+          <div class="field-group"><div class="field-label">Extrait</div><textarea class="field-textarea" style="min-height:100px" onchange="updateNewsKey('news.${i}.excerpt',this.value)">${excerpt.replace(/</g,'&lt;')}</textarea></div>
+        </div>
+      </div>
+    </div>`;
+  }
+  list.innerHTML = html;
+}
+
+function toggleNews(i) {
+  document.getElementById('newsItem' + i).classList.toggle('open');
+}
+
+function updateNewsKey(key, value) {
+  if (DICT[editorLang]) DICT[editorLang][key] = value;
+}
+
+/* ════════════ JSON PREVIEW ════════════ */
+function renderJsonPreview() {
+  const el = document.getElementById('jsonPreview');
+  if (el && DICT) el.value = JSON.stringify(DICT, null, 2);
+}
+
+/* ════════════ SAUVEGARDE ════════════ */
+function saveAll() {
+  document.querySelectorAll('.val-input.modified').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (key && DICT[editorLang]) {
+      DICT[editorLang][key] = el.value;
+      el.classList.remove('modified');
+    }
+  });
+  renderJsonPreview();
+  showToast('Toutes les modifications ont été enregistrées');
+}
+
+/* ════════════ EXPORT ════════════ */
+function exportJSON() {
+  saveAll();
+  const blob = new Blob([JSON.stringify(DICT, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'gie-dynamic-translations.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Dictionnaire exporté');
+}
+
+/* ════════════ IMPORT ════════════ */
+function importJSON(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.en && data.fr) {
+        DICT = data;
+        allKeys = [];
+        renderTranslations();
+        renderNews();
+        renderJsonPreview();
+        showToast('Dictionnaire importé avec succès');
+      } else {
+        alert('Fichier JSON invalide — doit contenir les clés "en" et "fr"');
+      }
+    } catch(err) {
+      alert('Erreur de parsing JSON : ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* ════════════ TOAST ════════════ */
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = '✓ ' + msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+/* ════════════ INIT ════════════ */
+document.addEventListener('DOMContentLoaded', loadSiteScript);
+</script>
+</body>
+</html>

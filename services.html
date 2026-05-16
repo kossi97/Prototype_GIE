@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="page.services.meta">Services — GIE DYNAMIC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Amiri:wght@400;700&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+      .page-hero {
+        min-height: 60vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 140px 5vw 5rem;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(160deg, var(--navy-mid) 0%, var(--navy) 100%);
+      }
+
+      .page-hero .geo-bg {
+        opacity: 0.04;
+      }
+
+      .page-hero-bg-img {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=60') center/cover no-repeat;
+        opacity: 0.12;
+      }
+
+      .page-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+      }
+
+      .page-breadcrumb {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.35);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-breadcrumb a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+
+      .page-breadcrumb a:hover {
+        color: var(--gold-light);
+      }
+
+      .page-hero-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 400;
+        line-height: 1.1;
+        color: var(--white);
+        margin-bottom: 1.2rem;
+      }
+
+      .page-hero-title em {
+        font-style: italic;
+        color: var(--gold-light);
+        display: block;
+      }
+
+      .page-hero-desc {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.55);
+        line-height: 1.9;
+        max-width: 560px;
+        border-left: 2px solid var(--gold-dark);
+        padding-left: 1.2rem;
+      }
+
+      .img-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        height: 260px;
+        overflow: hidden;
+      }
+
+      .img-strip-item {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .img-strip-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        filter: brightness(0.75) saturate(0.8);
+      }
+
+      .img-strip-item:hover img {
+        transform: scale(1.08);
+        filter: brightness(0.9) saturate(1);
+      }
+
+      .img-strip-item::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 50%, rgba(10, 22, 40, .6) 100%);
+      }
+
+      .img-strip-caption {
+        position: absolute;
+        bottom: 0.8rem;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        text-align: center;
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .6);
+      }
+
+      .services-full {
+        padding: 5rem 5vw;
+        background: var(--navy-mid);
+      }
+
+      .svc-full-card {
+        display: grid;
+        grid-template-columns: 1fr 1.6fr 1.2fr;
+        gap: 3rem;
+        align-items: start;
+        padding: 3rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .06);
+      }
+
+      .svc-full-card:last-child {
+        border-bottom: none;
+      }
+
+      .svc-full-num {
+        font-family: var(--font-serif);
+        font-size: 4rem;
+        font-weight: 700;
+        color: rgba(201, 168, 76, .08);
+        line-height: 1;
+        margin-bottom: 1rem;
+      }
+
+      .svc-full-icon {
+        width: 52px;
+        height: 52px;
+        border: 1px solid rgba(201, 168, 76, .2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1px;
+      }
+
+      .svc-full-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--gold);
+        stroke-width: 1.3;
+        fill: none;
+      }
+
+      .svc-full-title {
+        font-family: var(--font-serif);
+        font-size: 1.7rem;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+
+      .svc-full-sub {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.2rem;
+      }
+
+      .svc-full-desc {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, .55);
+        line-height: 1.9;
+        margin-bottom: 1.5rem;
+      }
+
+      .svc-full-points {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .svc-full-points li {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, .5);
+        padding-left: 1.2rem;
+        position: relative;
+        line-height: 1.6;
+      }
+
+      .svc-full-points li::before {
+        content: '—';
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        font-size: 0.7rem;
+      }
+
+      .svc-img-box {
+        width: 100%;
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        border-radius: 2px;
+        position: relative;
+      }
+
+      .svc-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8);
+        transition: transform 0.5s;
+      }
+
+      .svc-full-card:hover .svc-img-box img {
+        transform: scale(1.05);
+      }
+
+      .svc-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(10, 22, 40, .4) 0%, transparent 60%);
+      }
+
+      .svc-tag-lg {
+        display: inline-block;
+        margin-top: 1.5rem;
+        font-size: 0.62rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 0.3rem 0.9rem;
+        border: 1px solid rgba(201, 168, 76, .25);
+        color: rgba(201, 168, 76, .7);
+        border-radius: 1px;
+      }
+
+      .cta-band {
+        background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+        border-top: 1px solid rgba(201, 168, 76, .15);
+        padding: 4rem 5vw;
+        text-align: center;
+      }
+
+      .cta-band h3 {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        color: var(--white);
+        margin-bottom: 0.8rem;
+      }
+
+      .cta-band p {
+        color: rgba(255, 255, 255, .45);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+      }
+
+      @media(max-width:768px) {
+        .img-strip {
+          grid-template-columns: 1fr 1fr;
+          height: 200px;
+        }
+
+        .svc-full-card {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .svc-full-right {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="loader">
+      <div class="loader-emblem">
+        <div class="loader-inner">
+          <div class="loader-dot"></div>
+        </div>
+      </div>
+      <div class="loader-text" data-i18n="loader.text">OMORAN-GROUP</div>
+    </div>
+
+    <nav id="main-nav">
+      <div class="nav-brand">
+        <a href="index.html" style="text-decoration:none;"></a>
+        <img class="nav-logo" src="Logo_Prototype.png" alt="OMORAN-GROUP Logo" width="36" height="36">
+        <div class="nav-brand-text">
+          <div class="nav-brand-main">OMORAN-GROUP</div>
+          <div class="nav-brand-sub" data-i18n="nav.sub">Excellence · Finance · West Africa</div>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-overlay" id="navOverlay"></div>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" data-i18n="nav.home">Home</a>
+        <a href="services.html" class="active" data-i18n="nav.services">Services</a>
+        <a href="projects.html" data-i18n="nav.projects">Projects</a>
+        <a href="regulation.html" data-i18n="nav.regulation">Regulation</a>
+        <a href="free-zone.html" data-i18n="nav.zft">Free Zone</a>
+        <a href="news.html" data-i18n="nav.news">News</a>
+        <a href="index.html#contact" class="nav-cta" data-i18n="nav.contact">Contact us</a>
+        <button class="lang-switch" onclick="toggleLang()" id="langBtn">FR</button>
+      </div>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <div class="geo-bg"></div>
+      <div class="page-hero-bg-img"></div>
+      <div class="page-hero-content reveal">
+        <div class="page-breadcrumb">
+          <a href="index.html" data-i18n="bc.home">Home</a> &nbsp;/&nbsp;
+          <span data-i18n="bc.services">Services</span>
+        </div>
+        <h1 class="page-hero-title">
+          <span data-i18n="services.hero.title">Our Services &amp;</span><br>
+          <em data-i18n="services.hero.em">Expertise</em>
+        </h1>
+        <p class="page-hero-desc" data-i18n="services.hero.desc">High-value advisory, engineering and financial
+          technology services operating freely within the UEMOA/ECOWAS space </p>
+      </div>
+    </div>
+
+    <!-- IMAGE STRIP -->
+    <div class="img-strip">
+      <div class="img-strip-item">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=75"
+          alt="Financial intermediation" loading="lazy">
+        <div class="img-strip-caption" data-i18n="svc.1.title">Financial Intermediation</div>
+      </div>
+      <div class="img-strip-item">
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=75"
+          alt="Financial Engineering" loading="lazy">
+        <div class="img-strip-caption" data-i18n="svc.2.title">Financial Engineering</div>
+      </div>
+      <div class="img-strip-item">
+        <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=600&q=75"
+          alt="Legal Engineering" loading="lazy">
+        <div class="img-strip-caption" data-i18n="svc.3.title">Legal Engineering</div>
+      </div>
+      <div class="img-strip-item">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=75"
+          alt="Project Design" loading="lazy">
+        <div class="img-strip-caption" data-i18n="svc.6.title">Project Design</div>
+      </div>
+    </div>
+
+    <!-- SERVICES DEEP CONTENT -->
+    <section class="services-full">
+
+      <!-- 01 Financial Intermediation -->
+      <div class="svc-full-card reveal">
+        <div class="svc-full-left">
+          <div class="svc-full-num">01</div>
+          <div class="svc-full-icon"><svg viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" />
+              <path d="M2 17l10 5 10-5" />
+              <path d="M2 12l10 5 10-5" />
+            </svg></div>
+        </div>
+        <div class="svc-full-center">
+          <div class="svc-full-sub" data-i18n="svc.1.tag">No Banking Licence Required</div>
+          <h2 class="svc-full-title" data-i18n="svc.1.title">Financial Intermediation</h2>
+          <p class="svc-full-desc" data-i18n="svc.1.desc">Connecting investors and project owners, structuring flows and
+            facilitating transactions across the UEMOA/ECOWAS regional space.</p>
+          <ul class="svc-full-points">
+            <li data-i18n="svc.1.pt1">Investor-project matchmaking across 15 ECOWAS states</li>
+            <li data-i18n="svc.1.pt2">Transaction structuring and flow management</li>
+            <li data-i18n="svc.1.pt3">Cross-border capital facilitation under UEMOA rules</li>
+            <li data-i18n="svc.1.pt4">Pre-investment advisory and opportunity screening</li>
+          </ul>
+          <span class="svc-tag-lg" data-i18n="svc.1.tag">OMORAN-GROUP Expertise</span>
+        </div>
+        <div class="svc-full-right">
+          <div class="svc-img-box">
+            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=700&q=75"
+              alt="Financial intermediation West Africa" loading="lazy">
+            <div class="svc-img-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 Financial Engineering -->
+      <div class="svc-full-card reveal">
+        <div class="svc-full-left">
+          <div class="svc-full-num">02</div>
+          <div class="svc-full-icon"><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg></div>
+        </div>
+        <div class="svc-full-center">
+          <div class="svc-full-sub" data-i18n="svc.2.tag">DYNAMIC Core Expertise</div>
+          <h2 class="svc-full-title" data-i18n="svc.2.title">Financial Engineering</h2>
+          <p class="svc-full-desc" data-i18n="svc.2.desc">Design of complex structures — holding, SPV, shareholders'
+            agreements — optimised for large-scale operations in West Africa.</p>
+          <ul class="svc-full-points">
+            <li data-i18n="svc.2.pt1">SPV and holding company design under OHADA law</li>
+            <li data-i18n="svc.2.pt2">Shareholders' agreement drafting and negotiation</li>
+            <li data-i18n="svc.2.pt3">Tax-optimised corporate structuring</li>
+            <li data-i18n="svc.2.pt4">Debt and equity structure optimisation</li>
+          </ul>
+          <span class="svc-tag-lg" data-i18n="svc.2.tag">OMORAN-GROUP Expertise</span>
+        </div>
+        <div class="svc-full-right">
+          <div class="svc-img-box">
+            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=700&q=75"
+              alt="Financial engineering Africa" loading="lazy">
+            <div class="svc-img-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 Legal Engineering -->
+      <div class="svc-full-card reveal">
+        <div class="svc-full-left">
+          <div class="svc-full-num">03</div>
+          <div class="svc-full-icon"><svg viewBox="0 0 24 24">
+              <rect x="4" y="4" width="16" height="16" />
+              <path d="M8 12h8M8 8h8M8 16h5" />
+            </svg></div>
+        </div>
+        <div class="svc-full-center">
+          <div class="svc-full-sub" data-i18n="svc.3.tag">DYNAMIC Expertise</div>
+          <h2 class="svc-full-title" data-i18n="svc.3.title">Legal Engineering</h2>
+          <p class="svc-full-desc" data-i18n="svc.3.desc">Comprehensive legal structuring, contract drafting and
+            regulatory compliance management for national and cross-border operations.</p>
+          <ul class="svc-full-points">
+            <li data-i18n="svc.3.pt1">OHADA-compliant contract drafting and negotiation</li>
+            <li data-i18n="svc.3.pt2">Regulatory compliance audits (BCEAO, UEMOA, ECOWAS)</li>
+            <li data-i18n="svc.3.pt3">Risk mapping and mitigation for investments</li>
+            <li data-i18n="svc.3.pt4">Corporate governance documentation and support</li>
+          </ul>
+          <span class="svc-tag-lg" data-i18n="svc.3.tag">OMORAN-GROUP Expertise</span>
+        </div>
+        <div class="svc-full-right">
+          <div class="svc-img-box">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=700&q=75"
+              alt="Legal engineering OHADA" loading="lazy">
+            <div class="svc-img-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Fundraising -->
+      <div class="svc-full-card reveal">
+        <div class="svc-full-left">
+          <div class="svc-full-num">04</div>
+          <div class="svc-full-icon"><svg viewBox="0 0 24 24">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg></div>
+        </div>
+        <div class="svc-full-center">
+          <div class="svc-full-sub" data-i18n="svc.4.tag">OMORAN-GROUP Core Expertise</div>
+          <h2 class="svc-full-title" data-i18n="svc.4.title">Fundraising</h2>
+          <p class="svc-full-desc" data-i18n="svc.4.desc">End-to-end capital mobilisation from public and private
+            funding sources, with investment-grade documentation and institution negotiations.</p>
+          <ul class="svc-full-points">
+            <li data-i18n="svc.4.pt1">Investment dossier preparation and presentation</li>
+            <li data-i18n="svc.4.pt2">Multilateral and bilateral donor engagement</li>
+            <li data-i18n="svc.4.pt3">Private equity and venture capital sourcing</li>
+            <li data-i18n="svc.4.pt4">Diaspora and crowdfunding investment structures</li>
+          </ul>
+          <span class="svc-tag-lg" data-i18n="svc.4.tag">OMORAN-GROUP Expertise</span>
+        </div>
+        <div class="svc-full-right">
+          <div class="svc-img-box">
+            <img src="https://images.unsplash.com/photo-1521790797524-b2497295b8a0?auto=format&fit=crop&w=700&q=75"
+              alt="Fundraising Africa" loading="lazy">
+            <div class="svc-img-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 Sovereign Asset Management -->
+      <div class="svc-full-card reveal">
+        <div class="svc-full-left">
+          <div class="svc-full-num">05</div>
+          <div class="svc-full-icon"><svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+              <path d="M14 17h7M17 14v7" />
+            </svg></div>
+        </div>
+        <div class="svc-full-center">
+          <div class="svc-full-sub" data-i18n="svc.5.tag">OMORAN-GROUP Expertise</div>
+          <h2 class="svc-full-title" data-i18n="svc.5.title">Sovereign Asset Management</h2>
+          <p class="svc-full-desc" data-i18n="svc.5.desc">Strategic advisory and portfolio management for public and
+            sovereign assets, aligned with BCEAO prudential requirements.</p>
+          <ul class="svc-full-points">
+            <li data-i18n="svc.5.pt1">Sovereign portfolio analysis and strategic allocation</li>
+            <li data-i18n="svc.5.pt2">BCEAO prudential ratio monitoring</li>
+            <li data-i18n="svc.5.pt3">Public asset performance reporting</li>
+            <li data-i18n="svc.5.pt4">Sovereign wealth fund advisory support</li>
+          </ul>
+          <span class="svc-tag-lg" data-i18n="svc.5.tag">OMORAN-GROUP Expertise</span>
+        </div>
+        <div class="svc-full-right">
+          <div class="svc-img-box">
+            <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=700&q=75"
+              alt="Sovereign asset management BCEAO" loading="lazy">
+            <div class="svc-img-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 Project Design -->
+      <div class="svc-full-card reveal">
+        <div class="svc-full-left">
+          <div class="svc-full-num">06</div>
+          <div class="svc-full-icon"><svg viewBox="0 0 24 24">
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg></div>
+        </div>
+        <div class="svc-full-center">
+          <div class="svc-full-sub" data-i18n="svc.6.tag">OMORAN-GROUP Expertise</div>
+          <h2 class="svc-full-title" data-i18n="svc.6.title">Project Design</h2>
+          <p class="svc-full-desc" data-i18n="svc.6.desc">From concept to delivery — feasibility studies, technical
+            structuring and end-to-end operational support across West Africa.</p>
+          <ul class="svc-full-points">
+            <li data-i18n="svc.6.pt1">Feasibility and viability studies</li>
+            <li data-i18n="svc.6.pt2">Technical and financial project structuring</li>
+            <li data-i18n="svc.6.pt3">Stakeholder mapping and partnership development</li>
+            <li data-i18n="svc.6.pt4">Operational launch and monitoring support</li>
+            <li data-i18n="svc.6.pt5">Monitoring and evaluation</li>
+          </ul>
+          <span class="svc-tag-lg" data-i18n="svc.6.tag">OMORAN-GROUP Expertise</span>
+        </div>
+        <div class="svc-full-right">
+          <div class="svc-img-box">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=700&q=75"
+              alt="Project design West Africa" loading="lazy">
+            <div class="svc-img-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 Company Domiciliation -->
+      <div class="svc-full-card reveal">
+        <div class="svc-full-left">
+          <div class="svc-full-num">07</div>
+          <div class="svc-full-icon"><svg viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg></div>
+        </div>
+        <div class="svc-full-center">
+          <div class="svc-full-sub" data-i18n="svc.7.tag">No Banking Licence Required</div>
+          <h2 class="svc-full-title" data-i18n="svc.7.title">Company Domiciliation</h2>
+          <p class="svc-full-desc" data-i18n="svc.7.desc">Full domiciliation services for local and international
+            businesses — legal address, RCCM registration and administrative support.</p>
+          <ul class="svc-full-points">
+            <li data-i18n="svc.7.pt1">Registered legal address in Lomé, Togo</li>
+            <li data-i18n="svc.7.pt2">RCCM registration and commercial formalities</li>
+            <li data-i18n="svc.7.pt3">Administrative liaison and mail management</li>
+            <li data-i18n="svc.7.pt4">Virtual office and meeting room access</li>
+          </ul>
+          <span class="svc-tag-lg" data-i18n="svc.7.tag">OMORAN-GROUP Expertise</span>
+        </div>
+        <div class="svc-full-right">
+          <div class="svc-img-box">
+            <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=700&q=75"
+              alt="Company domiciliation Togo Lome" loading="lazy">
+            <div class="svc-img-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <div class="cta-band">
+      <h3 data-i18n="cta.services.title">Ready to work with OMORAN-GROUP?</h3>
+      <p data-i18n="cta.services.desc">Our team delivers tailored solutions for investors, institutions and
+        entrepreneurs across West Africa.</p>
+      <a href="index.html#contact" class="btn-gold" style="display:inline-block;" data-i18n="cta.services.btn">Contact
+        us today</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-logo">OMORAN-GROUP</div>
+          <div class="footer-brand-sub" data-i18n="footer.sub">Financial Excellence in West Africa</div>
+          <p class="footer-desc" data-i18n="footer.desc">Economic Interest Grouping structured around financial
+            engineering, strategic asset acquisition and market development in the UEMOA/ECOWAS space, from Lomé, Togo.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.services">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html" data-i18n="svc.1.title">Financial Intermediation</a></li>
+            <li><a href="services.html" data-i18n="svc.2.title">Financial Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.3.title">Legal Engineering</a></li>
+            <li><a href="services.html" data-i18n="svc.4.title">Fundraising</a></li>
+            <li><a href="services.html" data-i18n="svc.5.title">Sovereign Asset Management</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.pages">Pages</div>
+          <ul class="footer-links">
+            <li><a href="projects.html" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="regulation.html" data-i18n="nav.regulation">Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Free Zone</a></li>
+            <li><a href="news.html" data-i18n="nav.news">News</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title" data-i18n="footer.legal">Legal Framework</div>
+          <ul class="footer-links">
+            <li><a href="regulation.html" data-i18n="nav.regulation">UEMOA Regulation</a></li>
+            <li><a href="regulation.html" data-i18n="footer.ecowas">ECOWAS Regulation</a></li>
+            <li><a href="free-zone.html" data-i18n="nav.zft">Togo Free Zone</a></li>
+            <li><a href="index.html#contact" data-i18n="nav.contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 OMORAN-GROUP — <span data-i18n="footer.rights">All rights
+            reserved</span></span>
+        <span class="footer-compliance">UEMOA · ECOWAS · OHADA · ZFT <span
+            data-i18n="footer.compliant">Compliant</span></span>
+      </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+  </body>
+
+</html>
