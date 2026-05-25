@@ -84,7 +84,7 @@ const TRANSLATIONS = {
     /* ── Services page ── */
     "services.hero.title":     "Our Services &amp;",
     "services.hero.em":        "Expertise",
-    "services.hero.desc":      "High-value advisory, engineering and financial technology services operating freely within the UEMOA/ECOWAS space — no banking licence required.",
+    "services.hero.desc":      "High-value advisory, engineering and financial technology services operating freely within the UEMOA/ECOWAS space.",
 
     "svc.1.title":             "Financial Intermediation",
     "svc.1.desc":              "Connecting investors and project owners, structuring flows and facilitating transactions across the UEMOA/ECOWAS regional space.",
@@ -590,7 +590,7 @@ const TRANSLATIONS = {
     /* ── Services page ── */
     "services.hero.title":     "Nos Services &amp;",
     "services.hero.em":        "Expertises",
-    "services.hero.desc":      "Services de conseil, ingénierie et technologie financière à haute valeur ajoutée opérant librement dans l'espace UEMOA/CEDEAO — aucun agrément bancaire requis.",
+    "services.hero.desc":      "Services de conseil, ingénierie et technologie financière à haute valeur ajoutée opérant librement dans l'espace UEMOA/CEDEAO.",
 
     "svc.1.title":             "Intermédiation Financière",
     "svc.1.desc":              "Mise en relation d'investisseurs et porteurs de projets, structuration des flux et facilitation des transactions dans l'espace régional UEMOA/CEDEAO.",
